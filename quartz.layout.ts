@@ -30,10 +30,13 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Explorer(),
   ],
   right: [
-    Component.Graph(),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
   ],
+  afterBody:[
+    Component.Graph(),
+  ],
+  
 }
 
 // components for pages that display lists of pages  (e.g. tags or folders)
@@ -47,4 +50,5 @@ export const defaultListPageLayout: PageLayout = {
     Component.Explorer(),
   ],
   right: [],
+  afterBody:[],
 }
