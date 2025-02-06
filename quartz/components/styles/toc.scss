@@ -5,7 +5,7 @@
   flex-direction: column;
 
   &.desktop-only {
-    max-height: 40%;
+    max-height: 60%;
   }
 }
 
@@ -48,7 +48,7 @@ button#toc {
   overflow-y: auto;
   max-height: 100%;
   transition:
-    max-height 0.35s ease,
+    max-height 0.45s ease,
     visibility 0s linear 0s;
   position: relative;
   visibility: visible;
@@ -56,7 +56,7 @@ button#toc {
   &.collapsed {
     max-height: 0;
     transition:
-      max-height 0.35s ease,
+      max-height 0.45s ease,
       visibility 0s linear 0.35s;
     visibility: hidden;
   }
