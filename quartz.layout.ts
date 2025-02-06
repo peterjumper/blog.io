@@ -28,7 +28,10 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Search(),
     Component.Darkmode(),
     // Component.Explorer(),
-    Component.DesktopOnly(),
+    Component.RecentNotes({
+      title: "Recent Writing",
+      limit: 4,
+    }),
 
   ],
   right: [
@@ -50,7 +53,10 @@ export const defaultListPageLayout: PageLayout = {
     Component.Search(),
     Component.Darkmode(),
     // Component.Explorer(),
-    Component.DesktopOnly(),
+    Component.RecentNotes({
+      title: "Recent Writing",
+      limit: 4,
+    }),
   ],
   right: [],
   afterBody:[],
