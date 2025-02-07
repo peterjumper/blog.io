@@ -168,8 +168,9 @@ For \( n = 10 \):
 Understanding these derivations provides a robust methodology for tackling problems involving sums and series. The techniques of polynomial fitting, finding common denominators, and factorization are invaluable tools that extend to many areas of mathematics. This explanation not only justifies the formula for the sum of squares but also prepares you to approach similar problems in the future.
 
 Happy learning!
-```
 ---
+
+
 
 # Verion2 inline latex
 
