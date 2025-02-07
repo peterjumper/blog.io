@@ -169,3 +169,102 @@ Understanding these derivations provides a robust methodology for tackling probl
 
 Happy learning!
 ```
+---
+
+# Verion2 inline latex
+
+
+Below is an updated document that explains the mathematical formulas for calculating the difference of squares, but now using inline math (e.g., `$...$`).
+
+---
+
+## 1. Sum of the Squares
+
+The sum of the squares of the first *n* natural numbers is given by:
+  
+The formula:  
+$1^2 + 2^2 + 3^2 + \ldots + n^2 = \dfrac{n(n+1)(2n+1)}{6}$
+
+### Derivation Outline
+
+1. **Polynomial Form Assumption**  
+   Assume the sum $S(n)$ can be expressed as a cubic polynomial:  
+   $S(n) = an^3 + bn^2 + cn + d$.  
+
+   Since $S(0) = 0$ (the sum of zero numbers is 0), it follows that $d = 0$.
+
+2. **Determining the Coefficients**  
+   Plug in small values for $n$:
+
+   - $n = 1$:  
+     $S(1) = a \cdot 1^3 + b \cdot 1^2 + c \cdot 1 = a + b + c = 1$
+   - $n = 2$:  
+     $S(2) = 8a + 4b + 2c = 1^2 + 2^2 = 5$
+   - $n = 3$:  
+     $S(3) = 27a + 9b + 3c = 1^2 + 2^2 + 3^2 = 14$
+
+   Solving these equations yields  
+   $\,a = \tfrac{1}{3}, \,\, b = \tfrac{1}{2}, \,\, c = \tfrac{1}{6}$.
+
+3. **Form the Polynomial**  
+   Substitute $a, b, c$ back into the polynomial:  
+   $S(n) = \tfrac{1}{3} n^3 + \tfrac{1}{2} n^2 + \tfrac{1}{6} n$.
+
+4. **Factorization**  
+   Factor out $n$:  
+   $S(n) = n \bigl(\tfrac{1}{3}n^2 + \tfrac{1}{2}n + \tfrac{1}{6}\bigr)$  
+
+   Convert the terms inside the parentheses to a common denominator of 6:  
+   $\tfrac{1}{3}n^2 = \tfrac{2}{6}n^2, \quad \tfrac{1}{2}n = \tfrac{3}{6}n, \quad \tfrac{1}{6} = \tfrac{1}{6},$  
+   so  
+   $S(n) = \dfrac{n \bigl(2n^2 + 3n + 1\bigr)}{6}.$  
+
+   Note that $2n^2 + 3n + 1$ factors neatly as $(n+1)(2n+1)$, giving:  
+   $S(n) = \dfrac{n(n+1)(2n+1)}{6}.$
+
+### Why the 6?
+
+The number 6 in the denominator results from combining fractional coefficients ($\tfrac{1}{3}, \tfrac{1}{2}, \tfrac{1}{6}$) under a common denominator. It corresponds to the least common multiple (LCM) of 2 and 3, ensuring $S(n)$ evaluates to an integer for any natural number $n$.
+
+---
+
+## 2. Square of the Sum
+
+Calculating the square of the sum of the first *n* natural numbers proceeds in two steps:
+
+1. **Compute the Sum**  
+   $1 + 2 + 3 + \ldots + n = \tfrac{n(n+1)}{2}.$
+
+2. **Square the Sum**  
+   $\Bigl(\tfrac{n(n+1)}{2}\Bigr)^2.$
+
+For example, let $n = 10$:
+
+- The sum: $1 + 2 + \ldots + 10 = \tfrac{10 \cdot 11}{2} = 55.$  
+- Squaring the sum: $(55)^2 = 3025.$
+
+---
+
+## 3. Difference of Squares
+
+We define the difference of squares as:
+
+$\text{Difference} = \Bigl(\tfrac{n(n+1)}{2}\Bigr)^2 \;-\; \dfrac{n(n+1)(2n+1)}{6}.$
+
+For $n = 10$:
+
+- Square of the sum: $3025.$  
+- Sum of the squares: $\dfrac{10 \cdot 11 \cdot 21}{6} = 385.$  
+- Their difference: $3025 - 385 = 2640.$
+
+---
+
+## Conclusion
+
+1. The **sum of squares** formula $1^2 + 2^2 + \ldots + n^2 = \tfrac{n(n+1)(2n+1)}{6}$ arises from polynomial fitting and factoring.
+2. The **square of the sum** involves $\bigl(\tfrac{n(n+1)}{2}\bigr)^2$.
+3. **Difference of squares** is their straightforward subtraction.
+
+Familiarity with techniques like polynomial fitting, factoring, and common denominators is invaluable for handling more advanced series and sum problems in mathematics. This understanding helps ensure correct and efficient implementation in code. 
+
+Happy learning!
