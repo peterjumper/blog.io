@@ -14,3 +14,5 @@ testing here is another web [[whatshot]]
 testing another website again [[new-page]]
 
 [[1735254230-arch-linux|arch-linux]]
+
+Testing math : [[1738895060-difference-of-squares-in-c]]
