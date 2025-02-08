@@ -592,6 +592,7 @@ For the subnet **10.0.0.128/26**, the router’s IP address (last usable IP) is 
 - Part 2 end
 
 ---
+- bosom exam for ccna exam mock
 native vlan on a router
 wireshark analysis
 layer 3 switching/multilayer switching
@@ -605,7 +606,139 @@ ccna remove belowed below topic but is essetial for understanding the ccna
 
 
 
+![case](1737061712-ccna-notes8-vlan/2025-02-06-14-55-16.png)
+
+- method 1 :
+
+-Use the command encapsulation dotlq vlan-id native on the router subinterface.
+
+- sw2 to r1
+(vlan20 to r1 icmp echo requst)
 
 
+![wireshark](1737061712-ccna-notes8-vlan/2025-02-06-14-56-15.png)
+type Virtual lan :0x8100
+
+vlan ID: 20 (vlan 20)
+
+another type : IPv4 (0x0800)
+
+icmo requst from r1 back to vlan20
+
+- method 2
+
+- Configure the IP address for the native VLAN on the router’s physical interface (the encapsulation dotilq vlan-1id command is not necessary)
+
+
+![2](1737061712-ccna-notes8-vlan/2025-02-06-15-23-27.png)
+- first one is vlan 10 ip 
+- other is using interface gigabitethernet to subvlan 
+
+
+![icon](1737061712-ccna-notes8-vlan/2025-02-06-15-29-49.png)
+# Layer 3 (mulitilayer ) switches
+
+A multilayer switch is capable of both switching AND routing.
+Itis ‘Layer 3 aware’.
+You can assign IP addresses to its interfaces, like a router.
+
+You can create virtual interfaces for each VLAN, and assign
+IP addresses to those interfaces.
+
+You can configure routes on it, just like a router.
+It can be used for inter-vlan routing
+
+sw2 into multilayer switch now
+
+
+![general](1737061712-ccna-notes8-vlan/2025-02-07-21-17-56.png)
+
+> comfortable converting between binary and dotted decimal is key! 
+
+A common rookie mistake (and the subject of many networking memes—yes, such a thing exists!) is to forget the add keyword when modifying the list of allowed VLANs on a trunk. For example, if you want to add VLAN 40 to the list of allowed VLANs, but you use the command switchport trunk allowed vlan 40, you haven’t added VLAN 40 to the list of allowed VLANs; you have replaced the list of allowed VLANs with only VLAN 40! 
+
+
+It’s a simple mistake, but the results can be disastrous: blocking all communications over the trunk except for hosts in a single VLAN. This is a potential “trick question” on the exam, so make sure you are aware of the difference between specifying the list of allowed VLANs (switchport trunk allowed vlan vlans) and adding to the list of allowed VLANs (switchport trunk allowed vlan add vlans). 
+
+
+----
+
+EXAM TIP The default VLAN and the native VLAN are often confused. The default VLAN is the VLAN that access ports are assigned to by default: VLAN 1 (this cannot be changed). The native VLAN is the VLAN that untagged frames are assigned to when received on a trunk port, and frames in the native VLAN are forwarded untagged over that port. The native VLAN is also VLAN 1 by default, but this can be changed per port. 
+
+![new case](1737061712-ccna-notes8-vlan/2025-02-06-15-32-51.png)
+
+in normal case , same case as before
+
+it will send through router first with according tag, like vlan 20 (before ), after r1 , -> vlan 10  -> vlan 10 to sw1 , -> des
+
+**SVIs** (Switch Virtual Interfaces) are the virtual interfaces you can assign IP addresses to in a multilayer switch.
+
+Configure each PC to use the SVI (NOT the router) as their gateway address.
+
+
+![new sw2 svis](1737061712-ccna-notes8-vlan/2025-02-07-21-33-17.png)
+
+
+![cloud to r1](1737061712-ccna-notes8-vlan/2025-02-07-21-37-52.png)
+
+![new cmd](1737061712-ccna-notes8-vlan/2025-02-07-21-38-23.png)
+- no interface (require reload afterward)
+
+
+![new ip](1737061712-ccna-notes8-vlan/2025-02-07-21-39-25.png)
+
+- with/30
+
+![defalult](1737061712-ccna-notes8-vlan/2025-02-07-21-40-06.png)
+
+
+![most important ip](1737061712-ccna-notes8-vlan/2025-02-07-21-40-18.png)
+- ip routing -> allow  layer 3
+
+
+![next cmd](1737061712-ccna-notes8-vlan/2025-02-07-21-40-46.png)
+
+- now allow to sign ip address into it
+
+
+![defalut ](1737061712-ccna-notes8-vlan/2025-02-07-21-41-59.png)
+
+
+switch 2 to defalut to point r1
+
+show interfaces status -> comfirm
+
+![result](1737061712-ccna-notes8-vlan/2025-02-07-21-44-05.png)
+
+now started to config svi
+
+
+![svi](1737061712-ccna-notes8-vlan/2025-02-07-21-44-34.png)
+svi are stutdown by dafault
+ no shutdown
+
+another example ih  (another sv1 for a vlan dosn't exist)
+
+
+![down down](1737061712-ccna-notes8-vlan/2025-02-07-21-45-31.png)
+down down  (because vlan don't exist)
+
+---
+
+usually when asign access point to vlan (it will auto create vlan if it dosent't existt )
+
+- but not for svi clearly
+
+requirments to create svi :
+(in our case , as r1 can provide up for vlan30 in switch 2 so , vlan 30 is up as well)
+
+
+![requirments](1737061712-ccna-notes8-vlan/2025-02-07-21-49-44.png)
+
+- work result
+
+
+![all show connected](1737061712-ccna-notes8-vlan/2025-02-07-21-50-05.png)
+ 
 
 
