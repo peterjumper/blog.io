@@ -108,3 +108,45 @@ Imagine a byte of data: `11001010`.
 ### Conclusion
 
 Hex is a sweet spot in computer science: it’s concise like binary, readable like decimal, and perfectly aligned with how computers process data (in 4-bit or 8-bit chunks). The "trick" is its direct mapping to binary, making it a bridge between human intuition and machine logic. With a little practice, you’ll find hex as natural as decimal for tech tasks!
+
+The trick to convert between binary and hexadecimal is to use the direct relationship between 4 binary digits and 1 hexadecimal digit. This method is quick and efficient for both conversions[1][3][6].
+
+## Binary to Hexadecimal Conversion
+
+1. Group the binary digits into sets of four, starting from the right.
+2. Add leading zeros to the leftmost group if needed.
+3. Convert each group of four binary digits to its hexadecimal equivalent.
+
+**Example**: Convert 1010101101001 to hexadecimal
+
+- Grouped: 0001 0101 0110 1001
+- Converted: 1 5 6 9
+- Result: (1569)₁₆[4]
+
+## Hexadecimal to Binary Conversion
+
+1. Convert each hexadecimal digit to its 4-digit binary equivalent.
+2. Concatenate all the binary groups.
+3. Remove leading zeros if desired.
+
+**Example**: Convert DEADBEEF to binary
+
+- Converted: 1101 1110 1010 1101 1011 1110 1110 1111
+- Result: 11011110101011011011111011101111[6]
+
+This method is efficient because each hexadecimal digit directly represents four binary digits, making the conversion process straightforward and easy to remember.
+
+Citations:
+[1] https://www.splashlearn.com/math-vocabulary/binary-to-hexadecimal
+[2] https://www.cuemath.com/numbers/hexadecimal-to-binary/
+[3] https://owlcation.com/stem/How-to-Convert-Hex-to-Binary-and-Binary-to-Hexadecimal
+[4] https://www.tutorialspoint.com/how-to-convert-binary-to-hexadecimal
+[5] https://www.splashlearn.com/math-vocabulary/hexadecimal-to-binary
+[6] https://learn.sparkfun.com/tutorials/hexadecimal/converting-tofrom-binary
+[7] https://www.youtube.com/watch?v=tSLKOKGQq0Y
+[8] https://www.youtube.com/watch?v=D_YC6DSPpQE
+[9] https://www.youtube.com/watch?v=EmYhr2z0f0E
+
+---
+
+Answer from Perplexity: pplx.ai/share
