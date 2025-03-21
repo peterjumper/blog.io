@@ -7,6 +7,10 @@ tags: []
 
 # csprimer-ComputerSystem-concept
 
+[[20250317-cmu-15-213|cmu-15-213]]
+[[bottomup-cs-c]]
+[npip99/cs-wiki: A computer science wiki serving as a collection of all kinds of CS-related knowledge](https://github.com/npip99/cs-wiki)
+[bloominstituteoftechnology/CS-Wiki: Lambda School CS Wiki](https://github.com/bloominstituteoftechnology/CS-Wiki)
 014 What do bigendian and littleendian mean
 
 BE
@@ -1500,42 +1504,1229 @@ def truncate(s, n):
 
 Does this click? Want to test it with your file?
 
-The trick to convert between binary and hexadecimal is to use the direct relationship between 4 binary digits and 1 hexadecimal digit. This method is quick and efficient for both conversions[1][3][6].
+---
 
-## Binary to Hexadecimal Conversion
+![](20250315-csprimer-computersystem-concept/2025-03-19-20-28-44.png)
 
-1. Group the binary digits into sets of four, starting from the right.
-2. Add leading zeros to the leftmost group if needed.
-3. Convert each group of four binary digits to its hexadecimal equivalent.
+Processing Virtual Memory:
 
-**Example**: Convert 1010101101001 to hexadecimal
+![](20250315-csprimer-computersystem-concept/2025-03-19-20-29-49.png)
 
-- Grouped: 0001 0101 0110 1001
-- Converted: 1 5 6 9
-- Result: (1569)₁₆[4]
+- heap and stack
 
-## Hexadecimal to Binary Conversion
+- stack from top to bottom (high to low) position
 
-1. Convert each hexadecimal digit to its 4-digit binary equivalent.
-2. Concatenate all the binary groups.
-3. Remove leading zeros if desired.
+![](20250315-csprimer-computersystem-concept/2025-03-19-20-30-49.png)
 
-**Example**: Convert DEADBEEF to binary
+Topest is kernel Memory
 
-- Converted: 1101 1110 1010 1101 1011 1110 1110 1111
-- Result: 11011110101011011011111011101111[6]
+Evereything is File
 
-This method is efficient because each hexadecimal digit directly represents four binary digits, making the conversion process straightforward and easy to remember.
+![](20250315-csprimer-computersystem-concept/2025-03-19-20-31-45.png)
 
-Citations:
-[1] https://www.splashlearn.com/math-vocabulary/binary-to-hexadecimal
-[2] https://www.cuemath.com/numbers/hexadecimal-to-binary/
-[3] https://owlcation.com/stem/How-to-Convert-Hex-to-Binary-and-Binary-to-Hexadecimal
-[4] https://www.tutorialspoint.com/how-to-convert-binary-to-hexadecimal
-[5] https://www.splashlearn.com/math-vocabulary/hexadecimal-to-binary
-[6] https://learn.sparkfun.com/tutorials/hexadecimal/converting-tofrom-binary
-[7] https://www.youtube.com/watch?v=tSLKOKGQq0Y
-[8] https://www.youtube.com/watch?v=D_YC6DSPpQE
-[9] https://www.youtube.com/watch?v=EmYhr2z0f0E
+![](20250315-csprimer-computersystem-concept/amdahl's%20law.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-19-20-34-36.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-19-20-34-45.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-19-20-35-20.png)
+
+Let’s dive into **Amdahl’s Law** from your _Computer Systems: A Programmer’s Perspective_ (CSAPP) course and break it down as simply as possible! Since you’re new to some of these ideas, I’ll use a fun analogy and keep it clear—no jargon overload. Imagine we’re solving this together over a snack.
 
 ---
+
+## What Is Amdahl’s Law?
+
+Amdahl’s Law is a rule that tells you how much faster a program can get when you try to speed up parts of it—like adding more workers to a job. It says: **the overall speedup is limited by the parts you _can’t_ speed up.** Even if you make some parts lightning-fast, the slow parts hold you back.
+
+---
+
+## Analogy: Baking Cookies
+
+Picture this: You’re baking 100 cookies, and it takes 60 minutes total. The work breaks down like this:
+
+- **Mixing dough**: 20 minutes (can speed up with helpers).
+- **Baking**: 40 minutes (oven can only do one batch at a time).
+
+### Step 1: Normal Baking
+
+- Total time: 20 (mixing) + 40 (baking) = **60 minutes**.
+
+### Step 2: Speed Up Mixing
+
+You hire 3 helpers, and now mixing takes only 5 minutes (20 ÷ 4, since 4 people work together).
+
+- New time: 5 (mixing) + 40 (baking) = **45 minutes**.
+- **Speedup**: 60 ÷ 45 = **1.33x faster**.
+
+### Step 3: Infinite Helpers?
+
+Add a million helpers—mixing drops to nearly 0 minutes.
+
+- New time: 0 (mixing) + 40 (baking) = **40 minutes**.
+- **Speedup**: 60 ÷ 40 = **1.5x faster**.
+
+### The Catch
+
+No matter how fast you mix, baking takes 40 minutes. You can’t speed up the oven part—it’s the bottleneck. The max speedup is 1.5x, not infinity, because **some work can’t be improved**.
+
+---
+
+## Amdahl’s Law in Simple Terms
+
+- **Formula**: Speedup = 1 / [(1 - P) + (P / S)]
+
+  - **P**: Fraction of the program you _can_ speed up (e.g., 0.33 for mixing, since 20/60).
+  - **S**: How much you speed that part up (e.g., 4x with 4 helpers).
+  - **1 - P**: Fraction you _can’t_ speed up (e.g., 0.67 for baking).
+
+- **Cookie Example**:
+
+  - P = 20/60 = 0.33 (mixing).
+  - 1 - P = 40/60 = 0.67 (baking).
+  - S = 4 (4 helpers).
+  - Speedup = 1 / [0.67 + (0.33 / 4)] = 1 / [0.67 + 0.0825] ≈ 1 / 0.7525 ≈ **1.33x**.
+
+- **Infinite Helpers (S → ∞)**:
+  - Speedup = 1 / [0.67 + (0.33 / ∞)] = 1 / 0.67 ≈ **1.5x**.
+
+---
+
+## Key Idea
+
+- **Speedup Limit**: The part you _can’t_ improve (baking, 0.67) caps how fast the whole job gets. Even with infinite helpers, you’re stuck waiting for the oven.
+- **Real-World**: In computers, if 90% of a program runs on multiple cores (P = 0.9) and 10% is single-threaded (1 - P = 0.1), speeding up the 90% has limits:
+  - 4 cores (S = 4): Speedup = 1 / [0.1 + (0.9 / 4)] ≈ 3.08x.
+  - ∞ cores: Speedup = 1 / 0.1 = 10x max.
+
+---
+
+## Why It Matters in CSAPP
+
+- **Parallelism**: Adding more CPU cores or threads doesn’t always make programs proportionally faster.
+- **Bottlenecks**: You learn to spot what’s sequential (can’t parallelize) vs. parallelizable.
+- **Design**: Focus on optimizing the unchangeable parts or rethinking the problem.
+
+---
+
+## Simple Takeaway
+
+- **Amdahl’s Law**: Speeding up a program is like baking cookies—make one part faster all you want, but the slow part decides the final time.
+- **Lesson**: Don’t expect miracles from more workers (or cores) if some work can’t be split.
+
+Does this click? Want to try a different example or dig deeper into CSAPP concepts? Let me know!
+
+---
+
+![](20250315-csprimer-computersystem-concept/2025-03-19-21-10-57.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-19-21-11-24.png)
+
+4 core cpu ~> 8 thread
+
+Let’s dive into these three concepts from your _Computer Systems: A Programmer’s Perspective_ (CSAPP) course—**Thread-Level Concurrency**, **Instruction-Level Parallelism (ILP)**, and **Single-Instruction Multiple-Data (SIMD) Parallelism**. Your input has some funky OCR symbols (like `%4 4% 3# %`), but I’ll assume they’re just noise and focus on the core ideas. I’ll explain each one simply, with analogies, like we’re building a team to get work done faster—no CS degree needed, just curiosity!
+
+---
+
+## 1. Thread-Level Concurrency (TLC)
+
+### What It Is
+
+Thread-Level Concurrency is about running multiple **threads** (small, independent tasks) at the same time on a computer, often using multiple CPU cores. It’s like having several workers doing different jobs simultaneously.
+
+### Analogy: A Busy Kitchen
+
+Imagine a restaurant kitchen:
+
+- **One cook** (single-threaded): Chops veggies, cooks soup, bakes bread—one task at a time, slow.
+- **Multiple cooks** (multi-threaded): One chops, one cooks, one bakes—all at once, faster!
+- If you have **multiple stoves** (CPU cores), each cook gets their own stove, and work flies.
+
+### How It Works
+
+- A program splits into threads (e.g., one thread loads data, another processes it).
+- Modern CPUs with multiple cores run these threads in parallel.
+- Example: A web server handling 10 users—each user’s request is a thread.
+
+### Key Points
+
+- **Speedup**: More cores = more threads running at once, but **Amdahl’s Law** says unparallelizable parts limit gains.
+- **CSAPP**: You’ll see this in multi-core programming—think pthreads or OpenMP.
+
+---
+
+## 2. Instruction-Level Parallelism (ILP)
+
+### What It Is
+
+Instruction-Level Parallelism is about executing multiple **instructions** (tiny steps in a program) at the same time _within a single thread_. The CPU figures out which instructions don’t depend on each other and runs them together.
+
+### Analogy: Assembly Line Workers
+
+Picture a car factory:
+
+- **Sequential**: One worker welds, then bolts, then paints—slow, one step at a time.
+- **Parallel**: Three workers—welder, bolter, painter—work on different cars at once, as long as they don’t trip over each other.
+- The CPU is the manager, scheduling tasks that don’t wait on each other.
+
+### How It Works
+
+- **Pipelining**: The CPU breaks instructions into stages (fetch, decode, execute) and overlaps them.
+- **Superscalar**: Modern CPUs have multiple execution units (e.g., adders, multipliers) and run independent instructions simultaneously.
+- Example: `a = b + c; d = e + f`—if `a` and `d` don’t depend on each other, compute both additions at once.
+
+### Key Points
+
+- **Limits**: Dependencies (e.g., `a = b + c; d = a + 1`) stop parallelism—you can’t compute `d` until `a` is ready.
+- **CSAPP**: This is why CPUs have fancy hardware like out-of-order execution—to squeeze out ILP.
+
+---
+
+## 3. Single-Instruction Multiple-Data (SIMD) Parallelism
+
+### What It Is
+
+SIMD is when one instruction operates on **multiple pieces of data** at the same time. It’s a special kind of parallelism where the CPU uses wide registers to process batches of data with a single command.
+
+### Analogy: A Paint Roller
+
+- **Normal Painting**: Use a tiny brush to paint one square at a time—slow.
+- **SIMD Painting**: Use a wide roller to paint four squares with one swipe—fast!
+- The “instruction” (swipe) is the same, but it hits multiple “data” (squares) at once.
+
+### How It Works
+
+- **Vector Processing**: CPUs have SIMD units (e.g., SSE, AVX on Intel) with registers holding multiple values (e.g., four 32-bit numbers).
+- Example: Add four pairs of numbers in one go:
+  - Normal: `a1 + b1`, `a2 + b2`, `a3 + b3`, `a4 + b4` (four instructions).
+  - SIMD: One instruction adds `[a1, a2, a3, a4] + [b1, b2, b3, b4] = [c1, c2, c3, c4]`.
+- Common in graphics, audio, or machine learning (e.g., adjusting pixel brightness).
+
+### Key Points
+
+- **Efficiency**: Great for repetitive tasks on big data sets (e.g., image filters).
+- **CSAPP**: You’ll see this in optimizing loops or using compiler flags like `-msse`.
+
+---
+
+## Comparing the Three
+
+| **Type**              | **What Runs at Once**      | **Analogy**           | **Where It Happens**  |
+| --------------------- | -------------------------- | --------------------- | --------------------- |
+| **Thread-Level**      | Multiple threads           | Multiple cooks        | Across CPU cores      |
+| **Instruction-Level** | Multiple instructions      | Assembly line workers | Inside one core       |
+| **SIMD**              | One instruction, many data | Paint roller          | Special CPU registers |
+
+---
+
+## Why They Matter in CSAPP
+
+- **Thread-Level Concurrency**: Teaches you to use multi-core CPUs effectively (e.g., parallel web servers).
+- **Instruction-Level Parallelism**: Shows how CPUs optimize single-threaded code—crucial for performance tuning.
+- **SIMD**: Unlocks power for data-heavy tasks (e.g., games, AI)—you’ll optimize code to leverage it.
+
+### Tie-In with Amdahl’s Law
+
+- **TLC**: Speedup depends on how much work splits across threads—sequential parts cap it.
+- **ILP**: Limited by instruction dependencies.
+- **SIMD**: Works only if your data fits the “same operation, many items” pattern.
+
+---
+
+## Simple Takeaway
+
+- **Thread-Level**: Many workers (threads) on many stoves (cores).
+- **Instruction-Level**: One worker juggling multiple tasks at once.
+- **SIMD**: One big tool hitting lots of nails with one swing.
+
+Does this make sense? Want to explore one more—like how to code them—or connect them to CSAPP labs? Let me know!
+
+![](20250315-csprimer-computersystem-concept/2025-03-19-21-30-49.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-19-21-32-06.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-19-21-32-51.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-19-21-33-05.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-20-27-24.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-20-28-23.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-20-28-33.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-20-28-39.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-20-28-46.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-20-29-23.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-20-29-38.png)
+
+- C -> hex -> binary -> Not`~` -> hex
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-20-31-27.png)
+
+logical operations in C
+
+- all not 0 -> true
+
+! 0x 41 -> think 0x41 first , -> true -> ! not(true) -> 0x00
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-20-32-24.png)
+
+if ( a && 5/a) avoiding `a` divide by 0
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-20-37-53.png)
+
+- shifting
+- shifting complemetnt with 0
+
+right shift there are two types
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-20-39-18.png)
+
+logical right shift:
+
+- pop last one , and adding 0 same as left shift, except direction
+
+arithmetic right shift:
+![](20250315-csprimer-computersystem-concept/2025-03-20-20-40-30.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-20-40-55.png)
+
+arithmetic right shift:
+
+- if the numbre is 1 , complement with 1 instead of 0
+
+e.g.
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-20-43-50.png)
+
+- arithmetic shifting is different
+
+### Logical vs. Arithmetic Shift: The Difference
+
+- **Logical Right Shift**:
+
+  - Shifts all bits right, fills leftmost bits with 0s.
+  - Used for unsigned integers or when treating values as raw bit patterns.
+  - Example: `00001010` (10) >> 2 = `00000010` (2).
+
+- **Arithmetic Right Shift**:
+  - Shifts all bits right, fills leftmost bits with the sign bit (0 for positive, 1 for negative).
+  - Used for signed integers to preserve the sign (effectively divides by 2 while maintaining negativity).
+  - Example: `11110110` (-10) >> 2 = `11111101` (-3).
+
+---
+
+### How the Compiler Chooses: Signed vs. Unsigned Types
+
+In C, the `>>` operator’s behavior (logical or arithmetic) depends on the **type** of the operand:
+
+- **Unsigned Types** (e.g., `unsigned int`, `unsigned char`):
+
+  - The compiler uses a **logical right shift**.
+  - Reason: Unsigned integers represent non-negative values (0 to 2^n - 1), so there’s no sign bit to preserve.
+  - Example:
+    ```c
+    unsigned int x = 0x80000000; // 2147483648 in decimal
+    x = x >> 4;                  // Logical shift: 0x08000000 (134217728)
+    ```
+
+- **Signed Types** (e.g., `int`, `char` if signed):
+
+  - The compiler uses an **arithmetic right shift** (on most platforms).
+  - Reason: Signed integers use two’s complement to represent negative numbers, and arithmetic shift preserves the sign bit for correct division semantics.
+  - Example:
+    ```c
+    int x = 0x80000000; // -2147483648 in decimal
+    x = x >> 4;         // Arithmetic shift: 0xF8000000 (-134217728)
+    ```
+
+- **Key Rule**: The C standard leaves the behavior of `>>` on signed integers implementation-defined for negative values, but virtually all modern compilers (GCC, Clang, MSVC) use arithmetic right shift for signed types on two’s complement systems (which is nearly universal today).
+
+---
+
+### When Does the Compiler Use Each?
+
+1. **Logical Shift**:
+
+   - **When**: The operand is an unsigned type (`unsigned int`, `unsigned char`, etc.).
+   - **Why**: No sign bit exists, so filling with zeros is the only logical choice.
+   - **Example**:
+     ```c
+     unsigned char x = 0xF0; // 240
+     x = x >> 4;             // 0x0F (15), logical shift
+     ```
+
+2. **Arithmetic Shift**:
+
+   - **When**: The operand is a signed type (`int`, `char` if signed) and the value is negative.
+   - **Why**: Preserves the sign for signed integer arithmetic (e.g., division by powers of 2).
+   - **Example**:
+     ```c
+     signed char x = 0xF0; // -16 in 8-bit two’s complement
+     x = x >> 4;           // 0xFF (-1), arithmetic shift
+     ```
+
+3. **Ambiguity with Positive Signed Values**:
+   - For positive signed integers (e.g., `int x = 6`), `>>` behaves the same as logical shift because the sign bit is 0, so both fill with zeros.
+   - Example:
+     ```c
+     int x = 6;     // 00000110
+     x = x >> 4;    // 00000000 (arithmetic or logical, same result)
+     ```
+
+---
+
+### Fixing Your Examples
+
+Your examples seem inconsistent. Let’s hypothesize corrections:
+
+- **Logical `00000110 >> 4`**: Should be `00000000`, not `00001001`.
+- **Logical `00001001 >> 4`**: Should be `00000000`.
+- **Arithmetic `00000110 >> 4`**: Should be `00000000`.
+- **Arithmetic `11111001 >> 4`**: Should be `11111111` (-1), not `00001001`.
+
+Possible intent:
+
+- If you meant `00001001` as a result, perhaps the shift was `>> 2` (e.g., `00100100 >> 2 = 00001001` logically).
+- For `11111001`, an arithmetic shift of a different value or fewer positions might yield `00001001` if misinterpreted as unsigned.
+
+---
+
+### Compiler Decision Process
+
+1. **Parse the Type**:
+   - Compiler checks `x`’s declaration (e.g., `int x` vs. `unsigned int x`).
+2. **Apply Semantics**:
+   - Unsigned → Logical shift (fill with 0s).
+   - Signed → Arithmetic shift (fill with sign bit, typically).
+3. **Generate Machine Code**:
+   - On x86, `SHR` (logical) for unsigned, `SAR` (arithmetic) for signed.
+   - Example assembly:
+     ```asm
+     shr eax, 4  ; Logical shift (unsigned)
+     sar eax, 4  ; Arithmetic shift (signed)
+     ```
+
+---
+
+### Conclusion
+
+- **Logical Shift**: Used for unsigned types, fills with 0s.
+- **Arithmetic Shift**: Used for signed types, preserves the sign bit.
+- **When**: Determined by the operand’s type in the C code, not the value itself.
+- **Your Examples**: Likely contain errors; corrected results align with standard shift behavior.
+
+If you clarify your intended inputs or context (e.g., bit width, shift amount), I can refine this further!
+
+---
+
+More details about integer in C
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-20-50-24.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-20-51-25.png)
+
+- unsigned encoding:
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-20-51-44.png)
+
+### What is B2U (Binary to Unsigned)?
+
+**B2U** refers to the straightforward mapping of a non-negative integer to its binary representation as an unsigned value. In this encoding:
+
+- The number is represented in base-2 (binary) without a sign bit.
+- The range for an \( n \)-bit unsigned integer is \( 0 \) to \( 2^n - 1 \).
+- Each bit position represents a power of 2, from \( 2^0 \) (rightmost) to \( 2^{n-1} \) (leftmost).
+
+For example:
+
+- For a 4-bit unsigned integer:
+  - \( B2U_4(0) = 0000 \)
+  - \( B2U_4(1) = 0001 \)
+  - \( B2U_4(5) = 0101 \)
+  - \( B2U_4(15) = 1111 \)
+- The subscript (e.g., \( B2U_4 \)) denotes the bit width.
+
+---
+
+### Applying B2U to a Vector
+
+Assuming your vector `v = [x1, x2, x3, x4]` contains non-negative integer components (e.g., `v = [3, 0, 5, 2]`), B2U encoding would convert each element into its unsigned binary form based on a fixed bit width. Let’s use a 4-bit width as an example:
+
+- **Vector**: \( v = [3, 0, 5, 2] \)
+- **B2U Encoding** (4 bits per element):
+  - \( x1 = 3 \): \( B2U_4(3) = 0011 \)
+  - \( x2 = 0 \): \( B2U_4(0) = 0000 \)
+  - \( x3 = 5 \): \( B2U_4(5) = 0101 \)
+  - \( x4 = 2 \): \( B2U_4(2) = 0010 \)
+- **Resulting Vector in Binary**: \( [0011, 0000, 0101, 0010] \)
+
+If the vector elements are symbolic (e.g., `zy`, `Ty`), they’d need to be numeric values first, which could come from evaluating expressions or assigning integer values.
+
+---
+
+### Combining into a Single Value (Optional)
+
+Sometimes, a vector’s elements are concatenated into a single unsigned integer (e.g., for storage or transmission). For \( v = [3, 0, 5, 2] \) with 4-bit elements:
+
+- Concatenate: \( 0011 \, 0000 \, 0101 \, 0010 \)
+- Result: \( 0011000001010010 \) (16 bits)
+- Decimal: \( 2^{13} \cdot 0 + 2^{12} \cdot 0 + 2^{11} \cdot 1 + 2^{10} \cdot 1 + \cdots + 2^1 \cdot 1 + 2^0 \cdot 0 = 1234 \)
+
+This assumes each element fits within the bit width and the total width (e.g., 16 bits) accommodates all elements.
+
+---
+
+### How B2U Works Mathematically
+
+For an integer \( x \) and bit width \( w \), the B2U encoding is simply its binary representation:
+
+- \( B2U_w(x) = \text{binary form of } x \), where \( 0 \leq x < 2^w \).
+- If \( x = a*{w-1} \cdot 2^{w-1} + a*{w-2} \cdot 2^{w-2} + \cdots + a*0 \cdot 2^0 \), then \( B2U_w(x) = a*{w-1} a\_{w-2} \cdots a_0 \) (bits \( a_i \) are 0 or 1).
+
+Example:
+
+- \( x = 5 \), \( w = 4 \):
+  - \( 5 = 0 \cdot 2^3 + 1 \cdot 2^2 + 0 \cdot 2^1 + 1 \cdot 2^0 = 0101 \)
+  - \( B2U_4(5) = 0101 \).
+
+---
+
+### When and Why Use B2U?
+
+- **When**: Used for unsigned integer types (e.g., `unsigned int` in C) where negative values aren’t needed.
+- **Why**: Simplest encoding for non-negative numbers; maximizes range (e.g., 0 to 255 for 8 bits) without reserving a sign bit.
+- **Contrast with Two’s Complement (B2T)**: B2U doesn’t handle negatives, unlike B2T, which uses the leftmost bit as a sign bit (e.g., \( 1111 \) is 15 in B2U_4, but -1 in B2T_4).
+
+---
+
+### Addressing Your Original Input
+
+Your OCR-corrupted vector `& = [zy, _1, Ty, -, To)` might have been something like \( v = [z, y, T, 0] \) or similar. Without the exact formula, I’ll hypothesize:
+
+- If \( v = [2, 1, 5, 0] \) and each element is 4-bit B2U:
+  - \( B2U_4(2) = 0010 \)
+  - \( B2U_4(1) = 0001 \)
+  - \( B2U_4(5) = 0101 \)
+  - \( B2U_4(0) = 0000 \)
+  - Vector: \( [0010, 0001, 0101, 0000] \).
+
+If you meant something specific (e.g., a formula combining these), please clarify!
+
+---
+
+### Summary
+
+- **B2U**: Converts non-negative integers to unsigned binary (e.g., \( 5 \to 0101 \) for 4 bits).
+- **Vector Application**: Each element gets its B2U representation based on a bit width.
+- **Compiler Use**: In C, `unsigned` types use B2U naturally (e.g., `unsigned int x = 5;` is stored as `00000101` in 8 bits).
+- **Your Case**: Likely a vector of integers encoded as unsigned binary; exact elements need confirmation.
+
+Let me know the correct vector or more context, and I’ll refine this further!
+
+---
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-20-57-09.png)
+
+B2U -> mean binary to unsigned
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-21-00-07.png)
+
+- important visual way to understand the concept
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-21-01-14.png)
+
+B2U_4 > 0~15
+
+---
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-21-02-53.png)
+
+the leftest bit is the sign bit
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-21-03-34.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-21-06-08.png)
+
+for 4 bit w ,
+the lowest point is -8, biggest point is 7 (0111)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-21-09-53.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-21-12-12.png)
+
+- signed maximum 2^7 -1
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-21-23-20.png)
+
+- signed minimum 2^7
+
+---
+
+Special Numeric in C
+unsigned UMax, is the same as -1 in signed number
+UMax (U unsigned) ~> -1 in (signed)
+
+### Corrected Interpretation
+
+You probably meant something like this:
+
+#### Values: `-1` and `UMax` in 8, 16, 32, 64 bits
+
+1. **For `-1`** (signed integer in two’s complement):
+
+   - 8-bit: `11111111`
+   - 16-bit: `11111111 11111111`
+   - 32-bit: `11111111 11111111 11111111 11111111`
+   - 64-bit: `11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111`
+
+2. **For `UMax`** (maximum unsigned integer, e.g., `UINT_MAX` in C):
+   - 8-bit: `11111111` (255 in decimal)
+   - 16-bit: `11111111 11111111` (65,535)
+   - 32-bit: `11111111 11111111 11111111 11111111` (4,294,967,295)
+   - 64-bit: `11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111` (18,446,744,073,709,551,615)
+
+Your observation: **The bit pattern for `-1` (signed) and `UMax` (unsigned) is identical**—all 1s—across these bit widths. This is a key feature of two’s complement representation in C.
+
+---
+
+### Explanation: Why `-1` and `UMax` Are the Same Bit Pattern
+
+In C:
+
+- **Signed integers** use **two’s complement** to represent negative numbers.
+- **Unsigned integers** use **B2U (Binary to Unsigned)** encoding, where all bits are interpreted as a positive value.
+
+#### Two’s Complement for `-1`
+
+- In two’s complement, `-1` is represented by flipping all bits of 0 and adding 1, but more simply, it’s all 1s:
+  - 8-bit: Start with 0 (`00000000`), invert (`11111111`), add 1 (wraps around, but `-1` is directly `11111111`).
+  - Decimal check: `11111111` = \(-2^7 + 2^6 + \cdots + 2^0 = -128 + 127 = -1\).
+  - Same for 16, 32, 64 bits: all 1s.
+
+#### Unsigned Maximum (`UMax`)
+
+- The maximum unsigned value occurs when all bits are 1:
+  - 8-bit: `11111111` = \( 2^8 - 1 = 255 \)
+  - 16-bit: `11111111 11111111` = \( 2^{16} - 1 = 65,535 \)
+  - 32-bit: `11111111 11111111 11111111 11111111` = \( 2^{32} - 1 = 4,294,967,295 \)
+  - 64-bit: `11111111 11111111 ...` = \( 2^{64} - 1 = 18,446,744,073,709,551,615 \).
+
+#### Why They’re the Same
+
+- The bit pattern `11111111...` is interpreted differently based on type:
+  - **Signed (`int`)**: `-1` (two’s complement).
+  - **Unsigned (`unsigned int`)**: `UMax` (maximum value).
+- This overlap is intentional in two’s complement systems, making conversions between signed and unsigned seamless at the bit level.
+
+---
+
+### Corrected Table
+
+Here’s what your table likely intended:
+
+#### `-1` (Signed, Two’s Complement)
+
+| Bits | Binary Representation                     | Decimal (Signed) |
+| ---- | ----------------------------------------- | ---------------- |
+| 8    | `11111111`                                | -1               |
+| 16   | `11111111 11111111`                       | -1               |
+| 32   | `11111111 11111111 11111111 11111111`     | -1               |
+| 64   | `11111111 11111111 ... 11111111 11111111` | -1               |
+
+#### `UMax` (Unsigned, B2U)
+
+| Bits | Binary Representation                     | Decimal (Unsigned)         |
+| ---- | ----------------------------------------- | -------------------------- |
+| 8    | `11111111`                                | 255                        |
+| 16   | `11111111 11111111`                       | 65,535                     |
+| 32   | `11111111 11111111 11111111 11111111`     | 4,294,967,295              |
+| 64   | `11111111 11111111 ... 11111111 11111111` | 18,446,744,073,709,551,615 |
+
+---
+
+### How This Works in C
+
+- **Type Determines Interpretation**:
+
+  ```c
+  int s = -1;              // 11111111 (8-bit example)
+  unsigned int u = 255;    // 11111111 (8-bit example)
+  printf("%d\n", s);       // Prints: -1
+  printf("%u\n", u);       // Prints: 255
+  ```
+
+  - Same bits, different meaning.
+
+- **Casting**:
+
+  ```c
+  int s = -1;              // 11111111
+  unsigned int u = s;      // 11111111, now 255
+  printf("%u\n", u);       // Prints: 255
+  ```
+
+  - Casting reinterprets the bits without changing them.
+
+- **Constants in C**:
+  - `-1` is signed by default.
+  - `UINT_MAX` (from `<limits.h>`) is the unsigned max (e.g., `4294967295U` for 32-bit).
+
+---
+
+### Fixing the Typos
+
+- **OCR Errors**: `111teee`, `1111eee1111`, `1111e-01111` → All meant to be `1111...` (repeating 1s).
+- **Structure**: Your table had separators (`—_—`, `——`) that likely delineate `-1` and `UMax` rows, with bit widths (8, 16, 32, 64) misaligned by OCR.
+
+---
+
+### Key Insight
+
+In C, `-1` (signed) and `UMax` (unsigned) share the same bit pattern (all 1s) due to two’s complement. The compiler doesn’t “choose” between them; the type (`int` vs. `unsigned int`) dictates how the bits are interpreted:
+
+- Signed: `-1`.
+- Unsigned: \( 2^n - 1 \).
+
+Let me know if you had a specific vector or additional formula in mind!
+
+---
+
+# Conversion btw signed and unsigned
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-21-31-43.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-21-31-58.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-21-35-00.png)
+
+T2U -> signed to unsigned
+
+U2T -> unsigned to signed
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-21-36-17.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-21-37-45.png)
+
+- C will change signed to unsigned behind
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-21-38-58.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-21-39-05.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-22-40-39.png)
+
+char -> short (bigger bits)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-22-42-14.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-22-43-37.png)
+evidence for this formula (I skip that for now)
+
+- small to big
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-22-44-59.png)
+
+give up higher 16 bit
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-22-45-52.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-22-46-30.png)
+
+- 123456 mod 10^3 to get 456(last 3 digit)
+
+`print(123456 % 10**3)`
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-22-50-20.png)
+
+- truncating signed number
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-22-50-56.png)
+2.2 finished
+
+---
+
+# Integer Arithmetic
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-22-52-08.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-22-52-19.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-22-53-37.png)
+
+### What Are Unsigned Numbers?
+
+- **Unsigned integers** are numbers that can only be non-negative (0 or positive).
+- They are stored in binary with a fixed number of bits (e.g., 8 bits, 16 bits).
+- For \( w \) bits:
+  - Smallest value: 0 (all bits are 0).
+  - Largest value: \( 2^w - 1 \) (all bits are 1).
+  - Example: For \( w = 4 \) bits:
+    - Range: 0 to \( 2^4 - 1 = 15 \) (binary: `0000` to `1111`).
+
+---
+
+### The Formula for Unsigned Addition
+
+The image gives the formula for adding two unsigned numbers \( x \) and \( y \), where both are in the range \( 0 \leq x < 2^w \) and \( 0 \leq y < 2^w \). The operation is denoted \( x +\_u y \), meaning "unsigned addition with \( w \) bits."
+
+The formula is:
+
+\[
+x +\_u y =
+\begin{cases}
+x + y, & \text{if } x + y < 2^w \\
+x + y - 2^w, & \text{if } 2^w \leq x + y < 2^{w+1}
+\end{cases}
+\]
+
+---
+
+### What Does This Mean?
+
+This formula describes what happens when you add two unsigned numbers:
+
+1. **No Overflow**: If the sum \( x + y \) fits within \( w \) bits (i.e., \( x + y < 2^w \)), you get the normal sum.
+2. **Overflow**: If the sum \( x + y \) is too big (i.e., \( x + y \geq 2^w \)), the result "wraps around" by subtracting \( 2^w \).
+
+---
+
+### Simple Explanation of Overflow
+
+- Think of an unsigned number as a car odometer with a fixed number of digits. For example, a 4-bit unsigned number is like an odometer that goes from 0000 to 9999 (but in binary, 0000 to 1111, or 0 to 15 in decimal).
+- If you go past the maximum (15 in this case), the odometer "rolls over" to 0 and keeps counting from there.
+
+#### Example with \( w = 4 \) bits:
+
+- Range: 0 to 15 (binary: `0000` to `1111`).
+- Let’s add \( x = 10 \) (`1010`) and \( y = 7 \) (`0111`):
+  - Normal sum: \( 10 + 7 = 17 \).
+  - Max value for 4 bits: \( 2^4 = 16 \).
+  - Since \( 17 \geq 16 \), there’s overflow.
+  - Formula: \( x + y - 2^w = 17 - 16 = 1 \).
+  - Result: \( 10 +\_u 7 = 1 \) (binary: `0001`).
+
+#### Another Example:
+
+- \( x = 5 \) (`0101`), \( y = 3 \) (`0011`):
+  - Normal sum: \( 5 + 3 = 8 \).
+  - Since \( 8 < 16 \), no overflow.
+  - Result: \( 5 +\_u 3 = 8 \) (binary: `1000`).
+
+---
+
+### Why Does Overflow Happen?
+
+- Computers use a fixed number of bits to store numbers.
+- For \( w \) bits, the largest number is \( 2^w - 1 \).
+- If the sum exceeds this, the extra bits are "lost" (they don’t fit), and the result wraps around:
+  - The formula \( x + y - 2^w \) is like keeping only the lower \( w \) bits of the sum.
+
+#### Visualizing with Bits (4-bit example):
+
+- \( x = 10 \) (`1010`), \( y = 7 \) (`0111`):
+  - Add in binary:
+    ```
+      1010
+    + 0111
+    ------
+     10001  (17 in decimal)
+    ```
+  - But 4 bits can only hold up to `1111` (15). The leftmost bit (`1`, which is \( 2^4 = 16 \)) is discarded.
+  - Keep the lower 4 bits: `0001` (1 in decimal).
+  - Same as \( 17 - 16 = 1 \).
+
+---
+
+### Key Points
+
+- **No Overflow**: If \( x + y < 2^w \), the result is just \( x + y \).
+- **Overflow**: If \( x + y \geq 2^w \), subtract \( 2^w \) to "wrap around."
+- This wrapping behavior is standard for unsigned integers in C (e.g., `unsigned int`).
+
+#### Real-World Analogy:
+
+- Imagine a clock (12-hour format). If it’s 10:00 and you add 5 hours:
+  - \( 10 + 5 = 15 \).
+  - 12 is the max, so \( 15 - 12 = 3 \).
+  - Result: 3:00.
+- Unsigned addition works the same way, but with \( 2^w \) as the "max."
+
+---
+
+### Why Does This Matter?
+
+- In programming, unsigned overflow is well-defined (it wraps around), unlike signed overflow, which is undefined in C.
+- This behavior is useful in applications like:
+  - Counters (e.g., odometers, timers).
+  - Hash functions or checksums, where wrapping is intentional.
+
+---
+
+### Summary
+
+- **Unsigned Addition**: Add normally, but if the result is too big (\( \geq 2^w \)), subtract \( 2^w \) to wrap around.
+- **Overflow**: Happens when the sum exceeds the maximum value for the bit width.
+- **Example**: For 4 bits, \( 10 + 7 = 17 \), but max is 15, so \( 17 - 16 = 1 \).
+
+Let me know if you’d like more examples or a deeper dive!
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-22-58-54.png)
+because highest number become 0 ~ = - 2^w
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-22-59-58.png)
+
+return sum >= x;
+
+- as x an y must > 0, so the sum of these two must bigger than one of them
+
+- checking overflow in c
+
+proof:
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-23-02-45.png)
+
+---
+
+# Two's Complement Addition
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-23-03-41.png)
+
+t = first number , represent signed number?
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-23-04-29.png)
+
+there is two overflow case in two's complement addition
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-23-14-45.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-23-15-00.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-23-15-21.png)
+
+Let’s break down the concept of **two’s complement addition** for signed numbers, focusing on **positive overflow** and **negative overflow**, as shown in the image. I’ll explain this in a simple way, using examples to make it clear.
+
+---
+
+### What Are Signed Numbers?
+
+- **Signed numbers** can be positive, negative, or zero.
+- In computers, they’re stored using **two’s complement** with a fixed number of bits (e.g., 4 bits, 8 bits).
+- For \( w \) bits:
+  - Range: \( -2^{w-1} \) to \( 2^{w-1} - 1 \).
+  - Example: For \( w = 4 \) bits:
+    - Range: \( -2^{4-1} = -8 \) to \( 2^{4-1} - 1 = 7 \).
+    - Binary: `1000` (-8) to `0111` (7).
+- The leftmost bit is the **sign bit**:
+  - 0 = positive or zero.
+  - 1 = negative.
+
+---
+
+### Two’s Complement Addition Formula
+
+The image gives the formula for adding two signed numbers \( x \) and \( y \), where both are in the range \( -2^{w-1} \leq x < 2^{w-1} \) and \( -2^{w-1} \leq y < 2^{w-1} \). The operation is denoted \( x +\_t y \), meaning "two’s complement addition with \( w \) bits."
+
+The formula is:
+
+\[
+x +\_t y =
+\begin{cases}
+x + y - 2^w, & \text{if } 2^{w-1} \leq x + y & \text{(Positive overflow)} \\
+x + y, & \text{if } -2^{w-1} \leq x + y < 2^{w-1} \\
+x + y + 2^w, & \text{if } x + y < -2^{w-1} & \text{(Negative overflow)}
+\end{cases}
+\]
+
+---
+
+### What Does This Mean?
+
+This formula describes what happens when you add two signed numbers in two’s complement:
+
+1. **No Overflow**: If the sum \( x + y \) fits within the range \( -2^{w-1} \leq x + y < 2^{w-1} \), you get the normal sum.
+2. **Positive Overflow**: If the sum \( x + y \geq 2^{w-1} \), the result is too large (too positive), so subtract \( 2^w \) to wrap around.
+3. **Negative Overflow**: If the sum \( x + y < -2^{w-1} \), the result is too small (too negative), so add \( 2^w \) to wrap around.
+
+---
+
+### Simple Explanation with Examples (4-bit Numbers)
+
+Let’s use \( w = 4 \) bits:
+
+- Range: -8 to 7 (binary: `1000` to `0111`).
+- \( 2^{w-1} = 2^3 = 8 \), \( -2^{w-1} = -8 \), \( 2^w = 2^4 = 16 \).
+
+#### 1. No Overflow
+
+- Add \( x = 3 \) (`0011`) and \( y = 2 \) (`0010`):
+  - Normal sum: \( 3 + 2 = 5 \).
+  - Check range: \( -8 \leq 5 < 8 \)? Yes.
+  - Result: \( 5 +\_t 2 = 5 \) (binary: `0101`).
+- **No wrapping needed** because the sum fits.
+
+#### 2. Positive Overflow
+
+- Add \( x = 5 \) (`0101`) and \( y = 4 \) (`0100`):
+  - Normal sum: \( 5 + 4 = 9 \).
+  - Check range: \( 9 \geq 8 \)? Yes (too positive).
+  - Formula: \( x + y - 2^w = 9 - 16 = -7 \).
+  - Result: \( 5 +\_t 4 = -7 \) (binary: `1001`).
+- **What Happened?**
+  - The sum (9) is too big for 4 bits (max is 7).
+  - It wraps around: \( 9 - 16 = -7 \).
+  - In binary:
+    ```
+      0101  (5)
+    + 0100  (4)
+    ------
+      1001  (-7 in two’s complement)
+    ```
+  - The carry-out is discarded, and the sign bit flips, indicating overflow.
+
+#### 3. Negative Overflow
+
+- Add \( x = -5 \) (`1011`) and \( y = -6 \) (`1010`):
+  - Normal sum: \( -5 + (-6) = -11 \).
+  - Check range: \( -11 < -8 \)? Yes (too negative).
+  - Formula: \( x + y + 2^w = -11 + 16 = 5 \).
+  - Result: \( -5 +\_t -6 = 5 \) (binary: `0101`).
+- **What Happened?**
+  - The sum (-11) is too small for 4 bits (min is -8).
+  - It wraps around: \( -11 + 16 = 5 \).
+  - In binary:
+    ```
+      1011  (-5)
+    + 1010  (-6)
+    ------
+      0101  (5 in two’s complement)
+    ```
+  - The result flips to positive, indicating overflow.
+
+---
+
+### What Are Positive and Negative Overflow?
+
+- **Positive Overflow**:
+
+  - Happens when adding two positive numbers, and the result is too large (e.g., \( 5 + 4 = 9 > 7 \)).
+  - The sum exceeds the maximum positive value (\( 2^{w-1} - 1 \)).
+  - Result wraps to a negative number (e.g., \( 9 \to -7 \)).
+
+- **Negative Overflow**:
+  - Happens when adding two negative numbers, and the result is too small (e.g., \( -5 + (-6) = -11 < -8 \)).
+  - The sum is less than the minimum value (\( -2^{w-1} \)).
+  - Result wraps to a positive number (e.g., \( -11 \to 5 \)).
+
+---
+
+### Why Does Overflow Happen?
+
+- Computers use a fixed number of bits.
+- If the result of addition doesn’t fit in the range, it wraps around:
+  - Too positive → subtract \( 2^w \).
+  - Too negative → add \( 2^w \).
+- This wrapping is a feature of two’s complement, but in C, signed integer overflow is **undefined behavior** (compilers may not handle it consistently).
+
+---
+
+### Real-World Analogy
+
+- Think of a 4-bit signed number as a clock with numbers from -8 to 7.
+- **Positive Overflow**: If you’re at 7 and add 1, you “roll over” to -8 (like a clock going from 11:59 to 12:00).
+- **Negative Overflow**: If you’re at -8 and subtract 1, you roll over to 7.
+
+---
+
+### Key Points
+
+- **Signed Numbers**: Use two’s complement; range is \( -2^{w-1} \) to \( 2^{w-1} - 1 \).
+- **No Overflow**: Sum fits in the range.
+- **Positive Overflow**: Sum too large (\( \geq 2^{w-1} \)), subtract \( 2^w \).
+- **Negative Overflow**: Sum too small (\( < -2^{w-1} \)), add \( 2^w \).
+
+Let me know if you’d like more examples or a deeper explanation!
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-23-19-42.png)
+the key is the sum of x and y , and the value of 2^w-1
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-23-22-31.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-23-22-47.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-23-23-19.png)
+
+- overflow checking for ADD , `+`
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-23-25-55.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-23-27-18.png)
+
+Let’s dive into the concept of the **additive inverse** as presented in the image, which is from the context of _Computer Systems: A Programmer’s Perspective_ (CS:APP). The image discusses the additive inverse for both unsigned and signed (two’s complement) numbers in the context of computer arithmetic. I’ll explain this concept step-by-step, using inline math in LaTeX format with `$$` as requested, and provide examples to make it clear.
+
+---
+
+### What is the Additive Inverse?
+
+The **additive inverse** of a number \( x \) is another number \( x' \) such that when you add them together, you get zero. In regular math, for any number \( x \), the additive inverse is \( -x \), because \( x + (-x) = 0 \).
+
+In computer systems, numbers are stored with a fixed number of bits (\( w \)), and the way we compute the additive inverse depends on whether the numbers are **unsigned** or **signed** (using two’s complement). The image provides formulas for both cases.
+
+---
+
+### Unsigned Numbers: Additive Inverse
+
+#### Formula
+
+For an unsigned number \( x \), where \( 0 \leq x < 2^w \), the additive inverse \( -\_u x \) (unsigned negation) is defined as:
+
+\[
+-\_u x = \begin{cases}
+x, & \text{if } x = 0 \\
+2^w - x, & \text{if } x > 0
+\end{cases}
+\]
+
+#### Explanation
+
+- **Unsigned numbers** range from \( 0 \) to \( 2^w - 1 \). For example, with \( w = 4 \) bits, the range is \( 0 \) to \( 15 \) (binary: \( 0000 \) to \( 1111 \)).
+- The additive inverse \( x' \) must satisfy \( x + x' = 0 \) in unsigned arithmetic. Since unsigned addition wraps around (as we saw in the previous unsigned addition explanation), \( x + x' \) must equal \( 2^w \), which wraps to \( 0 \).
+
+#### Case 1: \( x = 0 \)
+
+- If \( x = 0 \), the inverse is \( 0 \), because \( 0 + 0 = 0 \).
+- Example: \( -\_u 0 = 0 \).
+
+#### Case 2: \( x > 0 \)
+
+- If \( x > 0 \), the inverse is \( 2^w - x \).
+- Why? Because \( x + (2^w - x) = 2^w \), and in unsigned arithmetic with \( w \) bits, \( 2^w \) wraps around to \( 0 \).
+
+#### Example (4 bits, \( w = 4 \))
+
+- \( x = 5 \) (binary: \( 0101 \)).
+- \( 2^w = 2^4 = 16 \).
+- \( -\_u 5 = 2^4 - 5 = 16 - 5 = 11 \) (binary: \( 1011 \)).
+- Check: \( 5 + 11 = 16 \), which wraps to \( 0 \) in 4-bit unsigned arithmetic:
+  - Binary: \( 0101 + 1011 = 10000 \), keep 4 bits: \( 0000 \) (0).
+
+#### Why It Works
+
+- Unsigned addition \( +\_u \) wraps around at \( 2^w \). So, \( x + (2^w - x) = 2^w \equiv 0 \mod 2^w \).
+
+---
+
+### Signed Numbers (Two’s Complement): Additive Inverse
+
+#### Formula
+
+For a signed number \( x \), where \( 0 \leq x < 2^w \) (but interpreted as two’s complement, so \( -2^{w-1} \leq x < 2^{w-1} \)), the additive inverse \( -\_u x \) (unsigned negation first) is used to compute \( x' \), and then:
+
+\[
+x + x' = 2^w = 0
+\]
+
+#### Explanation
+
+- **Signed numbers** use two’s complement, with range \( -2^{w-1} \) to \( 2^{w-1} - 1 \). For \( w = 4 \), range is \( -8 \) to \( 7 \).
+- The image first computes \( -\_u x \) (unsigned negation), then interprets the result in two’s complement.
+- The equation \( x + x' = 2^w \) means the sum wraps to \( 0 \) in \( w \)-bit arithmetic.
+
+#### Steps to Find the Additive Inverse
+
+1. Compute \( -\_u x \):
+   - If \( x = 0 \), \( -\_u 0 = 0 \).
+   - If \( x > 0 \), \( -\_u x = 2^w - x \).
+2. Interpret \( -\_u x \) as a two’s complement number to get \( x' \).
+
+#### Example (4 bits, \( w = 4 \))
+
+- \( x = 5 \) (binary: \( 0101 \), two’s complement: \( +5 \)).
+- Step 1: Compute \( -\_u 5 \):
+  - \( 2^4 - 5 = 16 - 5 = 11 \) (binary: \( 1011 \)).
+- Step 2: Interpret \( 1011 \) in two’s complement:
+  - Sign bit is 1 (negative).
+  - Invert bits: \( 0100 \), add 1: \( 0101 \), so \( 1011 = -5 \).
+- So, the additive inverse of \( 5 \) is \( -5 \).
+- Check: \( 5 + (-5) = 0 \):
+  - Binary: \( 0101 + 1011 = 10000 \), keep 4 bits: \( 0000 \) (0).
+
+#### Special Case: \( x = 0 \)
+
+- \( x = 0 \), \( -\_u 0 = 0 \), which is \( 0 \) in two’s complement.
+- Inverse of \( 0 \) is \( 0 \), as expected.
+
+#### Case: \( x < 0 \)
+
+- \( x = -5 \) (binary: \( 1011 \)).
+- \( -\_u 1011 \):
+  - \( x \) as unsigned: \( 1011 = 11 \).
+  - \( 2^4 - 11 = 16 - 11 = 5 \) (binary: \( 0101 \)).
+- Interpret \( 0101 \): \( +5 \).
+- So, inverse of \( -5 \) is \( 5 \).
+- Check: \( -5 + 5 = 0 \).
+
+---
+
+### Why the Same Formula for Both?
+
+- The image uses \( -\_u x \) (unsigned negation) for both cases because:
+  - In unsigned arithmetic, \( x + (2^w - x) = 0 \mod 2^w \).
+  - In two’s complement, the bit pattern of \( 2^w - x \) (when \( x > 0 \)) naturally corresponds to \( -x \).
+- This reflects how computers perform negation: they compute \( 2^w - x \) (or equivalently, invert bits and add 1).
+
+#### Two’s Complement Negation
+
+- To negate \( x \) in two’s complement: invert all bits and add 1.
+- Example: \( x = 5 \) (\( 0101 \)):
+  - Invert: \( 1010 \).
+  - Add 1: \( 1011 \) (\( -5 \)).
+- This matches \( 2^4 - 5 = 11 \), which is \( 1011 \).
+
+---
+
+### Key Points
+
+- **Unsigned**:
+  - Additive inverse of \( x \) is \( 2^w - x \) (if \( x > 0 \)), or \( 0 \) (if \( x = 0 \)).
+  - \( x + (2^w - x) = 0 \mod 2^w \).
+- **Signed (Two’s Complement)**:
+  - Use the same \( -\_u x \), but interpret the result in two’s complement.
+  - For \( x > 0 \), inverse is \( -x \); for \( x < 0 \), inverse is \( -x \) (positive).
+- **In Practice**: Computers compute the additive inverse by bit inversion plus 1, which aligns with \( 2^w - x \).
+
+#### Example in C
+
+```c
+unsigned int x = 5;
+unsigned int x_inv = -x; // 2^w - x (unsigned)
+printf("%u\n", x + x_inv); // 0 (wraps around)
+
+int y = 5;
+int y_inv = -y; // Two’s complement negation
+printf("%d\n", y + y_inv); // 0
+```
+
+---
+
+### Summary
+
+- The **additive inverse** \( x' \) makes \( x + x' = 0 \).
+- **Unsigned**: \( x' = 2^w - x \) (if \( x > 0 \)), wraps to 0.
+- **Signed**: Same bit pattern, but interpreted as \( -x \) in two’s complement.
+- Computers use this to perform negation efficiently.
+
+Let me know if you’d like more examples!
+
+---
+
+- signed additive inverse
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-23-30-35.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-23-30-49.png)
