@@ -2,8 +2,8 @@
 id: index
 aliases: []
 tags:
-  - test
-title: Welcome to Quartz
+  - index
+title: Welcome to My Website
 ---
 
 This is a blank Quartz installation.
