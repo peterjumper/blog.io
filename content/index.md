@@ -1,15 +1,16 @@
 ---
 id: index
-aliases:
-  - My linux experience:
+aliases: []
 tags:
   - index
 title: Welcome to My Website
 ---
 
-# My linux experience:
+My linux experience:
 
 [[1735254230-arch-linux|arch-linux]], [[20250217-asahi-linux|asahi-linux]], [[1736285296-arch-linux-qemu|arch-linux-qemu]]
+
+- [[20250304-efficient-command-line]]
 
 ## Script:
 
@@ -32,6 +33,9 @@ title: Welcome to My Website
 - [[20250319-cs-sicp]]
 - [[1737418909-cs61a|cs61a]]
 - [[20250402-cs61a-part2|cs61a-part2]]
+- [[1719513191-python-my-note|python my note 2024-06-28]]
+
+## Hardware knowledge
 
 ## CLI:
 
