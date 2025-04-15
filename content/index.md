@@ -12,9 +12,21 @@ My linux experience:
 
 - [[20250304-efficient-command-line]]
 
+![](index/2025-04-15-18-38-58.png)
+
+Arch Linux
+Fedora Linux -> Macbook pro m1 (dual boot)
+
 ## Script:
 
 - [[1720985816-webtoebook|web_to_ebook]]
+
+## Programming :
+
+- [[20250319-cs-sicp]]
+- [[1737418909-cs61a|cs61a]]
+- [[20250402-cs61a-part2|cs61a-part2]]
+- [[1719513191-python-my-note|python my note 2024-06-28]]
 
 ## Network study:
 
@@ -28,13 +40,6 @@ My linux experience:
 - [[1736976154-ccna-notes7-day13-subnetting]]
 - [[1737061712-ccna-notes8-vlan]]
 
-## Programming :
-
-- [[20250319-cs-sicp]]
-- [[1737418909-cs61a|cs61a]]
-- [[20250402-cs61a-part2|cs61a-part2]]
-- [[1719513191-python-my-note|python my note 2024-06-28]]
-
 ## Hardware knowledge
 
 ## CLI:
@@ -44,3 +49,8 @@ My linux experience:
 ## Devops:
 
 - [[20230305-mydocker]]
+- [[20250405-python-uv]]
+- [[1735671282-python-subtitle]]
+- [[20250404-777-python-ipynb|777-python-ipynb]]
+
+> To follow the path: look to the master, follow the master, walk with the master, see through the master, become the master.
