@@ -25,3 +25,7 @@ Network study:
 - [[1737061712-ccna-notes8-vlan]]
 
 Programming study:
+
+- [[20250319-cs-sicp]]
+- [[1737418909-cs61a|cs61a]]
+- [[20250402-cs61a-part2|cs61a-part2]]
