@@ -24,6 +24,7 @@ Fedora Linux -> Macbook pro m1 (dual boot)
 ## Programming & Computer Science:
 
 - [[20250315-csprimer-computersystem-concept]]
+- [[20250313-777-compiler|777-Compiler]]
 - [[20250319-cs-sicp]]
 - [[1737418909-cs61a|cs61a]]
 - [[20250402-cs61a-part2|cs61a-part2]]
