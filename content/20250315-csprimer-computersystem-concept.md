@@ -2730,3 +2730,11 @@ Let me know if you’d like more examples!
 ![](20250315-csprimer-computersystem-concept/2025-03-20-23-30-35.png)
 
 ![](20250315-csprimer-computersystem-concept/2025-03-20-23-30-49.png)
+
+![](20250315-csprimer-computersystem-concept/2025-03-20-23-55-34.png)
+
+---
+
+- unsigned Multiplication
+
+should start with 2.3

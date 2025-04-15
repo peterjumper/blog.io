@@ -21,7 +21,7 @@ Fedora Linux -> Macbook pro m1 (dual boot)
 
 - [[1720985816-webtoebook|web_to_ebook]]
 
-## Programming :
+## Programming & Computer Science:
 
 - [[20250319-cs-sicp]]
 - [[1737418909-cs61a|cs61a]]
