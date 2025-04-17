@@ -14,8 +14,14 @@ My linux experience:
 
 ![](index/2025-04-15-18-38-58.png)
 
-Arch Linux
-Fedora Linux -> Macbook pro m1 (dual boot)
+- Arch Linux (Catchos)
+
+  - Used performance-optimized distribution necessitates recompiling essential Arch Linux packages for x86-64-v3
+  - Adapted various sched-ext schedulers for improved responsiveness(SSD)
+  - latest linux keneral with kvm enabled and patched
+  - Latest BBRv3 (TCP congestion control algorithm) by Google
+
+- Fedora Linux -> Macbook pro m1 (dual boot)
 
 ## Script:
 
