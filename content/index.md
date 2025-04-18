@@ -12,6 +12,9 @@ My linux experience:
 
 - [[20250304-efficient-command-line]]
 
+![](index/2025-04-17-17-33-39.png)
+
+[peterjumper (Peter)](https://github.com/peterjumper)
 ![](index/2025-04-15-18-38-58.png)
 
 - Arch Linux (Catchos)
@@ -49,6 +52,8 @@ My linux experience:
 - [[1737061712-ccna-notes8-vlan]]
 
 ## Hardware knowledge
+
+[[20250417-it-support-experience|it-support-experience]]
 
 ## CLI:
 
