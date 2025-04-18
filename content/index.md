@@ -8,7 +8,11 @@ title: Welcome to My Website
 
 My linux experience:
 
-[[1735254230-arch-linux|arch-linux]], [[20250217-asahi-linux|asahi-linux]], [[1736285296-arch-linux-qemu|arch-linux-qemu]]
+[[1735254230-arch-linux|arch-linux]](it record my journey of using arch linux), [[20250217-asahi-linux|asahi-linux]](using fedora linux in M1 macbook as server with minimalist sever style), [[1736285296-arch-linux-qemu|arch-linux-qemu]](Learned Virtual Machine using KVM, VMware Workstation, etc )
+
+- self learned a trick to use VMware img and then convert it to kvm favora img
+  qemu-img convert -O qcow2 test.vmdk test-better.qcow2 (it improve the linux
+  lab about 80% responsiveness time in terms of CLI usage)
 
 - [[20250304-efficient-command-line]]
 
