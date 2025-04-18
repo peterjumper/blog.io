@@ -7,6 +7,11 @@ tags: []
 
 # it-support-experience
 
+- Provided technical support for both hardware and software issues, ensuring minimal downtime for users.
+- Handled ERP-related tasks, including processing RMAs, inventory checks, and managing internal communications via email.
+- Generated and reviewed detailed reports to ensure data accuracy and inventory consistency.
+- Conducted in-depth product analysis using SQL and Excel to identify specific component details (e.g., CPU type, motherboard version).
+
 ![](20250417-it-support-experience/2025-04-17-17-42-37.png)
 
 ![](20250417-it-support-experience/2025-04-17-17-42-53.png)
@@ -265,3 +270,104 @@ Like:
 
 - handling Canada , USA, EU case, including generating report, making RMA return
   merchandise authorization, Sales report, Checking goods and replying email.
+
+---
+
+## Sound Fix
+
+1. Press the WinKey+X, a menu should pop up on the lower left side of the screen. Select "Device Manager". 2. In the Device Manager, under "Sound, video and game controllers", uninstall every device you see under that category. Once you have uninstalled everything. Restart the computer. 3. As the computer is restarting, hold down F10. This should get you into the computer setup screen. If it doesn't you will have to restart the computer again once you reach the login screen. 4. In the BIOS menu, File > Apply Defaults and Exit > F10=Yes 5. When you login and reach the desktop, the drivers should be automatically downloaded and reset. 6. If you the sound issues persists, continue on to the next step. 7. At the login screen. Hold down the shift key, and select restart. Do not let go of the shift key. 8. You may left go of the shift key when you reach a blue menu. At this menu select Troubleshoot > Reset this PC > Keep my files > Select account name and enter password > Reset. After the process it complete you should be back at the login screen. Please let us know if these methods were able to resolve the issue. If not, we will have to process a RMA to cross-ship a replacement unit. Regards, AST Customer Support
+
+**legacy driver**, which is a term used for older software drivers that were designed for hardware from previous generations. Legacy drivers are often intended to support outdated devices or systems that may not be fully compatible with modern hardware or software updates.
+
+---
+
+## Realtek sound issue
+
+[Realtek HD Audio Manager Not Working or Showing on Windows 11/10 FIX [Tutorial] - YouTube](https://www.youtube.com/watch?v=DTVZPTe65qE)
+If your drivers are corrupted or not properly installed, your Realtek Audio Manager can malfunction. However, there’s a way to fix this problem.
+
+show hidden devices from view
+update driver of hidden sound, add legacy driver -> sound, video and gaming.
+
+didn't tried but could be useful
+
+[How to Install Realtek HD Audio Driver on Windows 11/10 & Lower - YouTube](https://www.youtube.com/watch?v=Pn50nxNd_38) msi setting as well
+
+browser the driver locally
+
+if old mechine ,
+
+- it could be legacy driver issue.
+
+[How to install Legacy Driver on Windows 10 - YouTube](https://www.youtube.com/watch?v=oyL9jGhuuX8&ab_channel=IgoroTech)
+
+## no display
+
+- check power, elecitity
+- **search for the cx got internal graphical card, make sure cx are using gpu dp port rather than internal vga (blue) port for displaying**
+- if it is new mechine, there is highly that the mechine is fine
+- seldom case: bios didn't enable the port
+- sometime, company provide hdmi to dp port , or hdmi to hdmi with dp adapter etc
+
+Case 2 , if the pc got internal gpu card ,
+extract the gpu card (external) and use internal card to determine weather it is the problem of our graphic card
+
+- if the monitor is ok, it is mostly likely 90% the issue of gpu card, L4 gpu to cx
+
+## Black screen
+
+- date of time ..., date of datem, -> cmos battery running out of battery
+- no ram, -> error message when booting the pc
+- hard disk? -> bios detect the hard disk or not
+- fans -> rear fans is actually in the front fans
+
+## USB
+
+- suggest client use another port first
+- some product (can't detect the usb port, built in motherboard -> L2,
+- newest product like 6 version usually port connected to motherboard , can't seperately fix it
+- if using for a while , just demaged in the front usb port rather than in motherboard -> only the front usb port
+
+## Graphical card
+
+- if the pc got the graphical card while also having the internal vidow card -> vga wont' work -> no display
+
+## Stuck at ping (just at the moment)-> (offline account)
+
+[No Microsoft Account Needed: How to Set Up Windows With a Local Account | PCMag](https://www.pcmag.com/how-to/how-to-set-up-microsoft-windows-with-local-account)
+File: How to Create an Offline account.pdf
+
+[Set up Windows 11 without internet - oobe\bypassnro - Microsoft Community](https://answers.microsoft.com/en-us/insider/forum/all/set-up-windows-11-without-internet-oobebypassnro/4fc44554-b416-4ecb-8961-6f79fd55ae0f)
+
+## Reset Window
+
+[The User Profile Service failed the sign in User profile cannot be loaded in Windows 10 / 11 - Fix ✅ - YouTube](https://www.youtube.com/watch?v=hJ0fefP2ffU)
+
+[How To Reset Windows 10 From The Login Screen - YouTube](https://www.youtube.com/watch?v=Iwvo0cgldlw)
+
+Follow the ms guide , auto installing bootable window
+
+making sure the usb is bootable , bios setting etc
+
+nfts is better format for usb format
+
+Reset guideline,
+
+Focusing on founding the issue only , don't go for the solution. just give bunch of the solution email.
+
+Currently, I don't have any solution according to your case, I will send you the email with the better solution.
+Or, I will have to talk with other technical team for further guildline and instruction, I will call you back in 10 minutes, is it ok?
+
+## Reset BCD in the window through command line
+
+[How to Rebuild the BCD in Windows](https://www.lifewire.com/how-to-rebuild-the-bcd-in-windows-2624508)
+
+## reinstall window
+
+Checklist 1. USB drive 8GB or larger capacity 2. Access to a functioning computer 3. Access to the internet
+
+[How to Install Windows 10 from a USB Flash Drive - YouTube](https://www.youtube.com/watch?v=SKbR6XT7fcA&t=236s)
+
+### Reinstall window without software or bootable media using only command line
+
+[2024 Reset Windows 10 Password without Software or Bootable Media using only Command Line - YouTube](https://www.youtube.com/watch?v=4ZhA0C2YVw0)
