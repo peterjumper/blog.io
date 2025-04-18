@@ -31,7 +31,7 @@ Like:
 
 ![](20250417-it-support-experience/2025-04-18-00-36-52.png)
 
-# Big TB area
+# Big TB area(Troubleshooting)
 
 ### **1/CPU Fault:**
 
