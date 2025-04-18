@@ -65,10 +65,10 @@ My linux experience:
 
 ## Devops:
 
-- [[20230305-mydocker]]
 - [[20250405-python-uv]]
 - [[1735671282-python-subtitle]]
 - [[20250404-777-python-ipynb|777-python-ipynb]]
 - [[20250405-cs-missing-semester]]
+- [[20230305-mydocker]]
 
 > To follow the path: look to the master, follow the master, walk with the master, see through the master, become the master.
