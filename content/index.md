@@ -6,6 +6,8 @@ tags:
 title: Welcome to My Website
 ---
 
+> Learned Linux in just two weeks—starting with Arch Linux—and successfully replaced my previous macOS (2020 m1 macbook) workflow by repurposing an old Dell OptiPlex 7040 (2015 product). Gained hands-on experience with essential Linux tools such as `udev`, virtual machines, `bash`, `nvim`, `tmux`, `firefox`, `pacman`, `systemd` and `linux kernel` etc.
+
 My linux experience:
 
 [[1735254230-arch-linux|arch-linux]](it record my journey of using arch linux), [[20250217-asahi-linux|asahi-linux]](using fedora linux in M1 macbook as server with minimalist sever style), [[1736285296-arch-linux-qemu|arch-linux-qemu]](Learned Virtual Machine using KVM, VMware Workstation, etc )
