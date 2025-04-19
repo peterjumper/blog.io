@@ -6,7 +6,7 @@ tags:
 title: Welcome to My Website
 ---
 
-> Learned Linux in just two weeks—starting with Arch Linux—and successfully replaced my previous macOS (2020 m1 macbook) workflow by repurposing an old Dell OptiPlex 7040 (2015 product). Gained hands-on experience with essential Linux tools such as `udev`, virtual machines, `bash`, `nvim`, `tmux`, `firefox`, `pacman`, `systemd` and `linux kernel` etc.
+> Learned Linux in just two weeks—starting with Arch Linux—and successfully replaced my previous macOS (2020 m1 macbook) workflow by repurposing an old Dell OptiPlex 7040 (2015 product). Gained hands-on experience with essential Linux tools such as `udev`, virtual machines, `bash`, `nvim`, `tmux`, `thorium`, `pacman`, `systemd` and `linux kernel` etc.
 
 My linux experience:
 
