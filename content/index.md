@@ -41,11 +41,15 @@ My linux experience:
 ## Programming & Computer Science:
 
 - [[20250315-csprimer-computersystem-concept]]
+- [[20250504-csprimer-computersystem-concept2|csprimer-computersystem-concept_2]]
+- [[20250513-csprimer-computersystem-concept3|csprimer-computersystem-concept3]]
 - [[20250313-777-compiler|777-Compiler]]
 - [[20250319-cs-sicp]]
 - [[1737418909-cs61a|cs61a]]
 - [[20250402-cs61a-part2|cs61a-part2]]
 - [[1719513191-python-my-note|python my note 2024-06-28]]
+- [[20250508-777-salesforce|777-salesforce]]
+- [[20250513-777-azure-learning|777-azure-learning]]
 
 ## Network study:
 
