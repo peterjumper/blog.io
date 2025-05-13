@@ -7,6 +7,9 @@ tags: []
 
 # csprimer-ComputerSystem-concept
 
+- [[20250504-csprimer-computersystem-concept2|csprimer-computersystem-concept_2]]
+- [[20250513-csprimer-computersystem-concept3|csprimer-computersystem-concept3]]
+
 [[20250317-cmu-15-213|cmu-15-213]]
 [[bottomup-cs-c]]
 [npip99/cs-wiki: A computer science wiki serving as a collection of all kinds of CS-related knowledge](https://github.com/npip99/cs-wiki)
