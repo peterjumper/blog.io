@@ -7,7 +7,7 @@ tags: []
 
 # 777-azure-learning
 
-- az-104 study : [[20250516-777-azure-notes]]
+- az-900 study : [[20250516-777-azure-notes]]
 
 ![](20250513-777-azure-learning/2025-05-13-14-34-13.png)
 
