@@ -50,6 +50,7 @@ My linux experience:
 - [[1719513191-python-my-note|python my note 2024-06-28]]
 - [[20250508-777-salesforce|777-salesforce]]
 - [[20250513-777-azure-learning|777-azure-learning]]
+- az-900: [[20250516-777-azure-notes]]
 
 ## Network study:
 
