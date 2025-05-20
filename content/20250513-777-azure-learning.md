@@ -9,6 +9,12 @@ tags: []
 
 - az-900 study : [[20250516-777-azure-notes]]
 
+- az-104 lab : [[20250518-777-azure-notes-3az-104|777-azure-notes-3(az-104)]]
+
+- az-104 official doc : [[20250519-777-az104-offical-doc|777-az104-offical-doc]]
+
+---
+
 ![](20250513-777-azure-learning/2025-05-13-14-34-13.png)
 
 ![](20250513-777-azure-learning/2025-05-13-14-35-57.png)
