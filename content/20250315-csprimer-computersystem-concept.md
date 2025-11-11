@@ -3,17 +3,40 @@ id: 20250315-csprimer-computersystem-concept
 aliases:
   - csprimer-ComputerSystem-concept
 tags: []
+created: 2025-09-08
+modified: 2025-09-08T14:49:03
 ---
 
 # csprimer-ComputerSystem-concept
 
-- [[20250504-csprimer-computersystem-concept2|csprimer-computersystem-concept_2]]
-- [[20250513-csprimer-computersystem-concept3|csprimer-computersystem-concept3]]
-
 [[20250317-cmu-15-213|cmu-15-213]]
 [[bottomup-cs-c]]
+[csprimer-algorithms](20251014-csprimer-algorithms.md)
 [npip99/cs-wiki: A computer science wiki serving as a collection of all kinds of CS-related knowledge](https://github.com/npip99/cs-wiki)
+[6.1810 / Fall 2025](https://pdos.csail.mit.edu/6.1810/2025/) mit new system
 [bloominstituteoftechnology/CS-Wiki: Lambda School CS Wiki](https://github.com/bloominstituteoftechnology/CS-Wiki)
+
+- [ ] **一個程式在電腦中是如何運作的:** (form github cs coding interview university wiki, cs anki deck)
+    - [ ] [How CPU executes a program (video)](https://www.youtube.com/watch?v=XM4lGflQFvA)
+    - [ ] [How computers calculate - ALU (video)](https://youtu.be/1I5ZMmrOfnA)
+    - [ ] [Registers and RAM (video)](https://youtu.be/fpnE6UAfbtU)
+    - [ ] [The Central Processing Unit (CPU) (video)](https://youtu.be/FZGugFqdr60)
+    - [ ] [Instructions and Programs (video)](https://youtu.be/zltgXvg6r3k)
+
+    > - [C++ 语言超详细系统学习路线（2025年最新） | 编程指北-计算机学习指南](https://csguide.cn/roadmap/cpp/how_to_learn_cpp.html) -> useful
+
+    - [Linux C++ 后台开发系统学习路线（2025年最新） | 编程指北-计算机学习指南](https://csguide.cn/roadmap/cpp/linux_cpp.html#_8-1-%E4%BB%80%E4%B9%88%E6%98%AF%E7%B3%BB%E7%BB%9F%E7%BA%A7%E7%BC%96%E7%A8%8B) -> part 2 , os csapp , low level courses
+
+    [Redis 超详细系统学习路线（2025） | 编程指北-计算机学习指南](https://csguide.cn/roadmap/backend_middleware/how_to_learn_redis.html#%E4%B8%89%E3%80%81%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99)
+    [自己动手写编译器 — 自己动手写编译器](https://pandolia.net/tinyc/)
+    [seaswalker/tiny-os: 《操作系统真象还原》一书实现的系统代码](https://github.com/seaswalker/tiny-os)
+
+[20250326-linux-study](20250326-linux-study.md) -> books list
+
+hlol folder -> compiler in python
+
+matt.might.net/articles/what-cs-majors-should-know/
+
 
 ---
 

@@ -248,6 +248,14 @@ Great question. Scientists and engineers use **significant digits**, **mantissas
 
 ---
 
+![](20250504-csprimer-computersystem-concept2/2025-06-23-08-55-17.png)
+a x b
+a -> 0to 9
+b -> 0to9
+`a * 10^b` -> floating point system
+
+---
+
 ## 🔹 Why Use Significant Digits & Floating-Point?
 
 ### 1. **Real-World Measurements Have Limits**

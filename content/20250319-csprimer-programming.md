@@ -3,12 +3,47 @@ id: 20250319-csprimer-programming
 aliases:
   - csprimer-programming
 tags: []
+created: 2025-09-01
+modified: 2025-09-01T02:59:29
 ---
 
 # csprimer-programming
 
+- [Programming Languages - Hyperpolyglot](https://hyperpolyglot.org/)
+  Programming Languages (comparison)
+
 > CMU exercises
 > [CodeCheck® Python Exercises](https://horstmann.com/codecheck/python-questions.html) > [CodingBat Python](https://codingbat.com/python) > [15-110: Principles of Computing](https://www.cs.cmu.edu/~15110/practice.html#ta)
+- [2025-09-05](notes/dailies/2025-09-05.md) -> cs4530 resource page
+
+- > [(71) Core Dumped - YouTube](https://www.youtube.com/@CoreDumpped) -> clear yt explanation video
+
+[learning how to learn](notes/1718022966-learning-how-to-learn.md)
+
+1. understand the problem
+   what is the unknown ans
+   what is known data
+   what is the condition
+2. recall similar experience
+   analogy, thinking connection
+3. Executing
+   check your each step, can u proof that this is right, self asking
+4. Review, feedback
+   put the ans back to question, check it
+   found different ways to solve it, if both way -> same ans -> true
+   simplify the problem into more intuitive
+
+analogy, comparison
+
+- easier problem comparing to current problem
+
+Start from mvp , minimal possibilities
+
+- could decreasing the condition , excluding the hardest part, do the rest you know first
+
+- using generalization as a tool
+
+
 
 ## What Is Recursion?
 
@@ -830,12 +865,10 @@ Your teacher is trying to teach you about **tail recursion elimination** and **t
 ### 🔍 **What Are You Learning?**
 
 1. **Recursive function calls consume stack space**
-
    - The `fib` function is implemented recursively using **lambda** (anonymous function).
    - Without optimization, recursive calls create **new stack frames**, which can lead to **stack overflow** if `n` is large.
 
 2. **Tail recursion and the stack problem**
-
    - In a normal recursive function, each call adds a new frame to the call stack.
    - However, **tail recursion** (when the recursive call is the last operation) can, in theory, be optimized by the compiler/interpreter to avoid growing the stack.
 
@@ -1459,7 +1492,6 @@ Example: exploring node.js streams with strace
 - use ps aux and grep that server.js and take a look of that pid info, dig it out
 
 - ls -al /proc/pid/fd (file descriptor)
-
   - find fd mean in strace
     man socket() if you find strace
     man 2 socket
@@ -1487,3 +1519,490 @@ what is gonna happen in the code
 Switch
 
 executor case py source code
+
+---
+
+- python bytecoda-interpreter
+
+---
+
+- vec object
+
+![](20250319-csprimer-programming/2025-04-20-02-11-02.png)
+
+![](20250319-csprimer-programming/2025-04-20-02-25-39.png)
+
+OOP is overated at somepoint, you can just use fuction name or C struct to make
+it
+
+- OOP is useful for making gui like usage like repeatly direction usage
+
+![](20250319-csprimer-programming/2025-04-20-02-27-35.png)
+
+> tips , you can dir(3) -> variable to see which **str** you can use , help((3).**str**) etc
+
+- help((3).**float**)
+
+Your teacher is using the `Vec` class to teach you about **Object-Oriented Programming (OOP)** in Python, specifically focusing on how to create and work with **custom objects** (classes) to represent real-world concepts. In this case, the `Vec` class represents a 2D vector, which is a mathematical concept with x and y coordinates. Let’s break down what your teacher is likely trying to teach you and explain it in a simple way.
+
+---
+
+### What Your Teacher Is Trying to Teach
+
+Your teacher is introducing you to key OOP concepts through the `Vec` class, including:
+
+1. **Classes and Objects**: How to define a blueprint (class) for an object and create instances of it.
+2. **Attributes**: How objects can store data (like `x` and `y` coordinates).
+3. **Methods**: How objects can have behaviors (like calculating the magnitude or performing operations).
+4. **Special Methods (Magic Methods)**: How to customize how objects behave with operators like `+`, `-`, `*`, or when printed.
+5. **Operator Overloading**: How to define what happens when you use operators (like `+` or `==`) on your objects.
+6. **Encapsulation**: Bundling data and methods that work on that data into a single unit (the `Vec` class).
+
+The `Vec` class is a great example because it’s simple but shows how these concepts come together to model something practical (a 2D vector).
+
+---
+
+### Explanation of the Code in Simple Terms
+
+Let’s go through the code step by step to understand what’s happening and why it’s useful.
+
+#### 1. **Defining the Class**
+
+```python
+class Vec(object):
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+```
+
+- A **class** is like a blueprint for creating objects. Here, `Vec` is a blueprint for a 2D vector.
+- The `__init__` method is a special method called when you create a new vector. It sets up the vector’s `x` and `y` coordinates.
+- `self` refers to the object being created. `self.x` and `self.y` store the vector’s coordinates.
+- Example: `v1 = Vec(3, 2)` creates a vector with `x = 3` and `y = 2`.
+
+**What this teaches**: How to create a custom object and give it properties (data).
+
+---
+
+#### 2. **Printing the Object**
+
+```python
+def __str__(self):
+    return f'<{self.x}, {self.y}>'
+```
+
+- The `__str__` method defines how the object looks when you print it.
+- When you do `print(v1)`, it shows `<3, 2>` instead of something generic like `<__main__.Vec object>`.
+- This makes the object easier to understand when you print it.
+
+**What this teaches**: How to control how your object is displayed (a special method).
+
+---
+
+#### 3. **Calculating the Magnitude**
+
+```python
+def magnitude(self):
+    """Return the magnitude of the vector"""
+    return (self.x**2 + self.y**2)**0.5
+```
+
+- This is a regular method that calculates the vector’s magnitude (its length) using the Pythagorean theorem: \(\sqrt{x^2 + y^2}\).
+- Example: For `v2 = Vec(1, 1)`, `v2.magnitude()` returns \(\sqrt{1^2 + 1^2} = \sqrt{2}\).
+- The `assert v2.magnitude() == 2**0.5` in the tests confirms this works.
+
+**What this teaches**: How to add behaviors (methods) to your object to do useful calculations.
+
+---
+
+#### 4. **Scalar Multiplication**
+
+```python
+def __mul__(self, s):
+    """Scalar multiplication"""
+    return Vec(s * self.x, s * self.y)
+```
+
+- The `__mul__` method defines what happens when you multiply a vector by a number (scalar) using `*`.
+- Example: `v1 * 2` multiplies `v1`’s coordinates by 2, so `Vec(3, 2) * 2` gives `Vec(6, 4)`.
+- The `assert v1 * 2 == Vec(6, 4)` confirms this.
+
+**What this teaches**: How to customize the `*` operator for your object (operator overloading).
+
+---
+
+#### 5. **Comparing Vectors**
+
+```python
+def __eq__(self, v2):
+    return self.x == v2.x and self.y == v2.y
+```
+
+- The `__eq__` method defines what happens when you check if two vectors are equal using `==`.
+- Two vectors are equal if their `x` and `y` coordinates are the same.
+- Example: `Vec(3, 2) == Vec(3, 2)` returns `True`.
+
+**What this teaches**: How to define equality for your objects.
+
+---
+
+#### 6. **Adding and Subtracting Vectors**
+
+```python
+def __add__(self, v2):
+    return Vec(self.x + v2.x, self.y + v2.y)
+
+def __sub__(self, v2):
+    return Vec(self.x - v2.x, self.y - v2.y)
+```
+
+- The `__add__` method defines vector addition with `+`. It adds the `x` and `y` coordinates of two vectors.
+  - Example: `v1 + v2` for `v1 = Vec(3, 2)` and `v2 = Vec(1, 1)` gives `Vec(4, 3)`.
+- The `__sub__` method defines vector subtraction with `-`. It subtracts the coordinates.
+  - Example: `v1 - v2` gives `Vec(2, 1)`.
+
+**What this teaches**: How to overload the `+` and `-` operators to work with your objects.
+
+---
+
+#### 7. **Negating a Vector**
+
+```python
+def __neg__(self):
+    return Vec(-self.x, -self.y)
+```
+
+- The `__neg__` method defines what happens when you use the `-` operator on a single vector (like `-v1`).
+- It flips the signs of the coordinates.
+- Example: `-v1` for `v1 = Vec(3, 2)` gives `Vec(-3, -2)`.
+
+**What this teaches**: Another example of operator overloading for unary operators.
+
+---
+
+#### 8. **Testing the Class**
+
+```python
+if __name__ == '__main__':
+    v1 = Vec(3, 2)
+    v2 = Vec(1, 1)
+    v3 = Vec(3, 4)
+
+    assert v2.magnitude() == 2**0.5
+    assert v3.magnitude() == 5
+    assert v1 * 2 == Vec(6, 4)
+    assert v1 + v2 == Vec(4, 3)
+    assert v1 - v2 == Vec(2, 1)
+    assert -v1 == Vec(-3, -2)
+
+    print('ok')
+```
+
+- This part creates some vectors and tests that all the methods work as expected using `assert` statements.
+- If all tests pass, it prints `'ok'`. If any fail, an error is raised.
+- This ensures the class behaves correctly.
+
+**What this teaches**: How to test your code to make sure your class works as intended.
+
+---
+
+### Why Is This Useful?
+
+Your teacher chose a 2D vector because it’s a simple but real-world example of how objects can represent something meaningful. Vectors are used in physics, graphics, and games to represent positions, velocities, or forces. By creating a `Vec` class, you learn how to:
+
+- Bundle data (`x`, `y`) and behaviors (like `magnitude`, addition) into one object.
+- Make your objects act like built-in Python types (using `+`, `*`, etc.).
+- Write clean, reusable code that’s easy to understand and extend.
+
+---
+
+### Key OOP Concepts in This Example
+
+Here’s how the code ties to OOP principles:
+
+1. **Encapsulation**: The `Vec` class keeps the `x` and `y` coordinates and related methods together.
+2. **Abstraction**: You can use the `Vec` class without worrying about how `magnitude` or addition is implemented.
+3. **Custom Behavior**: Special methods (`__add__`, `__mul__`, etc.) let you define how your objects work with Python operators.
+4. **Reusability**: You can create as many `Vec` objects as you want, and they all share the same behaviors.
+
+---
+
+### Try It Yourself
+
+To solidify your understanding, try these exercises:
+
+1. Create a new vector `v4 = Vec(0, 0)` and test what happens when you add it to `v1`.
+2. Add a new method `dot_product(self, v2)` to calculate the dot product of two vectors (\(x_1 \cdot x_2 + y_1 \cdot y_2\)).
+3. Modify the class to support division by a scalar (e.g., `v1 / 2`).
+
+Example for the dot product:
+
+```python
+def dot_product(self, v2):
+    return self.x * v2.x + self.y * v2.y
+```
+
+Then test it:
+
+```python
+v1 = Vec(3, 2)
+v2 = Vec(1, 1)
+print(v1.dot_product(v2))  # Should print 5 (3*1 + 2*1)
+```
+
+---
+
+### Final Note
+
+Your teacher is helping you learn how to think like a programmer by modeling a real-world concept (vectors) with code. The `Vec` class shows how Python’s OOP features let you create objects that are intuitive and powerful. Keep practicing by experimenting with the class, and you’ll get more comfortable with these ideas! If you have specific questions about the code or OOP, let me know.
+
+---
+
+- dir(object)
+
+it seems you can't simply == your class to number
+
+funny in python, seem can't len(your class) == to some nb, that mean you can't
+def **len** , but rather def len only
+
+e.g. v2.len() rather len(v2)
+
+This is the old-style formatting, but still works
+
+.
+
+Summary Table
+Method Example Code
+str() "Hello my name is " + self.name + " and I am " + str(self.age)
+f-string f"Hello my name is {self.name} and I am {self.age}"
+format() "Hello my name is {} and I am {}".format(self.name, self.age)
+% formatting "Hello my name is %s and I am %d" % (self.name, self.age)
+
+---
+
+`__eq__ -> ==`
+`__mul__ -> * `
+`__neg__` -> negative number
+
+![](20250319-csprimer-programming/2025-04-20-04-10-17.png)
+
+- you can do this or just Class VecMulti(tuple):
+
+- or referencing :
+
+```language
+
+def __init(self,vals):
+self.vals= tuple(vals)
+```
+
+[Getting Help | Effective Shell](https://effective-shell.com/part-1-transitioning-to-the-shell/getting-help/#the-online-cheatsheet)
+
+python -> ipython repl
+TS/nodejs -> repl -> deno or ijavascript
+
+- [traefik/yaegi: Yaegi is Another Elegant Go Interpreter](https://github.com/traefik/yaegi) -> go repl
+
+- [Compiler Explorer](https://godbolt.org/)
+
+[milanglacier/yarepl.nvim: All-in-one REPL and TUI App management tool. Offering flexible interaction paradigms, project-level configs, aider-chat integration, and native dot-repeat.](https://github.com/milanglacier/yarepl.nvim?tab=readme-ov-file)
+
+---
+
+![](20250319-csprimer-programming/2025-04-20-21-47-24.png)
+
+using collection import namedtuple
+to replace **init**
+
+then using Vec= namedtuple(xx) for Vec(iii) as Vec
+
+![](20250319-csprimer-programming/2025-04-20-21-49-12.png)
+
+---
+
+# CS primer point of view
+
+[Jonathan Blow's home page](http://number-none.com/blow/john_carmack_on_inlined_code.html)
+
+- depend on complexity rather than long or short
+- factoring out if too complex
+- know your tools well, like compiler , interpret
+- train the skill of how to solve it
+- community difference (cultural difference like emacs nvim, OOP versus C
+  community)
+
+[[2025-04-21]]
+
+- like different view on ORM
+
+- different view on pair programming( some prefer on e another)
+
+- cpp is class with c
+
+- garbage collection (gurantee will complete on time and just auto manage it)
+
+- test driven or not(automatically test or not)
+
+- could be good on either situation , with or without
+
+- the key is not blindly trusting one way
+
+- maybe depend on ecosystem and community
+
+[[2025-04-21]]
+
+- primer dont take 4 gang of design pattern as toolkit (self-help book like)
+- design pattern is useful though
+
+know your tools well is more important , architecture , compiler interpreter etc
+
+- being able to reason what actually happen step by step
+- write down sequence of instruction
+- format , test , code review in a certain way
+
+but code review is just picking at some time (taste)
+someone who understand the system well can explicitly tell the better way, great
+feedback
+
+primer recommend book:
+
+> anything that is assertive is wrong 🔥 always can be argue one way or other , so just
+> don't trust thing that is general , assertive
+
+[Software Design Book](https://web.stanford.edu/~ouster/cgi-bin/book.php)
+
+- this book even have a chapter POV on clean code
+- check his point with some great source codebase
+
+- always contradict to one or other approach
+
+- you can learn through the journey of achieving your goal though (swordsmanship)
+
+- swordsmanship -> awareness -> whatever the means (self-awareness)
+- pros and cons (vague standpoint though)
+
+  api design, design pattern,
+  similar to craftmanships [[20250321-essentialist---software-essentialist-2024-7|Essentialist - Software Essentialist 2024-7]]
+
+- there isn't standard way to code
+
+- i guess only my journey could tell the ans for myself, i prefer essentialist books lol (but he is mainly on web TS though)
+
+---
+
+- python interpreter
+- ceval.c (soucrecode)
+
+[rhettinger (Raymond Hettinger)](https://github.com/rhettinger)
+
+- python maintainer (good instructor)
+
+---
+
+[Exploring the Power of Negative Space Programming — Double Trouble](https://double-trouble.dev/post/negativ-space-programming/)
+
+- assert your way to test the program
+
+---
+
+![](20250319-csprimer-programming/2025-04-28-21-34-19.png)
+
+![](20250319-csprimer-programming/2025-04-28-21-35-48.png)
+
+- adding d to test it
+
+d = Displacement(3, 2)
+d.move(1, 5)
+assert d
+
+![](20250319-csprimer-programming/2025-04-28-22-02-01.png)
+
+- two way of doing this, left and right
+
+---
+
+![](20250319-csprimer-programming/2025-04-30-00-24-35.png)
+d = ver=init(3, 2)
+disp_move(d,1,5) -> not using d.move, but put d (initator into fucntion)
+assert d
+
+- here is the difference with class and without class
+
+![](20250319-csprimer-programming/2025-04-30-00-30-16.png)
+
+adding 'type': 'vec' etc
+setting value = [x,y] , or 'x' : x,
+
+---
+
+I understand you want to see how a C programmer would use structs and macros to achieve functionality similar to Python inheritance, without using Python's inheritance mechanisms. Since you haven't specified a particular example of Python inheritance to translate, I'll assume you want a general demonstration of how C can emulate inheritance-like behavior using structs and macros, which is a common approach in C to mimic object-oriented programming.
+
+In C, "inheritance" can be simulated by embedding a parent struct within a child struct (struct composition) and using macros or function pointers to achieve polymorphic behavior. Below, I'll create an example that mimics a simple inheritance hierarchy, similar to how you might have a base class and derived class in Python. For clarity, I'll model a "Vehicle" (parent) and "Car" (child) relationship, where the child extends the parent's properties and behavior. Macros will be used to simplify method calls or simulate shared behavior.
+
+```c
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+// Macro to access the parent struct from a child struct
+#define TO_VEHICLE(child_ptr) (&((child_ptr)->vehicle))
+
+// Vehicle "base class" struct
+typedef struct {
+    char model[50];
+    int speed;
+    void (*move)(void*); // Function pointer for polymorphic behavior
+} Vehicle;
+
+// Car "derived class" struct
+typedef struct {
+    Vehicle vehicle; // Embedded parent struct (composition)
+    int num_doors;
+} Car;
+
+// Function to initialize a Vehicle
+void vehicle_init(Vehicle* v, const char* model, int speed, void (*move)(void*)) {
+    strncpy(v->model, model, sizeof(v->model) - 1);
+    v->model[sizeof(v->model) - 1] = '\0';
+    v->speed = speed;
+    v->move = move;
+}
+
+// Vehicle's move implementation
+void vehicle_move(void* self) {
+    Vehicle* v = (Vehicle*)self;
+    printf("%s is moving at %d km/h\n", v->model, v->speed);
+}
+
+// Function to initialize a Car
+void car_init(Car* c, const char* model, int speed, int num_doors) {
+    vehicle_init(TO_VEHICLE(c), model, speed, car_move); // Initialize parent part
+    c->num_doors = num_doors;
+}
+
+// Car's move implementation (overrides Vehicle's)
+void car_move(void* self) {
+    Car* c = (Car*)self;
+    printf("%s (Car with %d doors) is moving at %d km/h\n",
+           TO_VEHICLE(c)->model, c->num_doors, TO_VEHICLE(c)->speed);
+}
+
+// Macro to simplify calling the move function
+#define MOVE(obj) ((obj)->move((void*)(obj)))
+
+int main() {
+    // Create a Vehicle
+    Vehicle v;
+    vehicle_init(&v, "Generic Vehicle", 100, vehicle_move);
+
+    // Create a Car
+    Car c;
+    car_init(&c, "Toyota", 120, 4);
+
+    // Demonstrate polymorphic behavior
+    MOVE(&v);           // Calls vehicle_move
+    MOVE(TO_VEHICLE(&c)); // Calls car_move via Vehicle pointer
+
+    return 0;
+}
+```
