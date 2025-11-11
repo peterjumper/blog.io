@@ -1,8 +1,11 @@
 ---
 id: index
-aliases: []
+aliases:
+  - Welcome to My Website
 tags:
   - index
+created: 2025-11-11
+modified: 2025-11-11T19:46:17
 title: Welcome to My Website
 ---
 
@@ -82,5 +85,11 @@ My linux experience:
 - [[20250404-777-python-ipynb|777-python-ipynb]]
 - [[20250405-cs-missing-semester]]
 - [[20230305-mydocker]]
+
+---
+
+[KMS](20251111-kms.md)
+
+
 
 > To follow the path: look to the master, follow the master, walk with the master, see through the master, become the master.
