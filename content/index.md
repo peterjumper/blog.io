@@ -43,6 +43,7 @@ My linux experience:
 
 ## Programming & Computer Science:
 
+- [modern-cpp](20250302-modern-cpp.md)
 - [[20250315-csprimer-computersystem-concept]]
 - [[20250504-csprimer-computersystem-concept2|csprimer-computersystem-concept_2]]
 - [[20250513-csprimer-computersystem-concept3|csprimer-computersystem-concept3]]
@@ -57,7 +58,6 @@ My linux experience:
 - [[20250508-777-salesforce|777-salesforce]]
 - [[20250513-777-azure-learning|777-azure-learning]]
 - az-900: [[20250516-777-azure-notes]]
-[modern-cpp](20250302-modern-cpp.md)
 
 ## Network study:
 
